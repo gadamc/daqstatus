@@ -38,11 +38,11 @@ function sanitize(obj){  //should I put this functionality into a show function 
    if(obj == null || typeof(obj) != 'object')
      return obj;
 
-   var temp = obj.constructor(); // changed
+   var temp = obj.constructor(); 
    
    var patt = new RegExp('[.-]','g');;
-   for(var key in obj) //don't copy the data
-     temp[key.replace(patt,'_').replace(patt,'_')] = sanitize(obj[key]);
+   for(var key in obj) 
+     temp[key.replace(patt,'_')] = sanitize(obj[key]);
    return temp;
  }
  

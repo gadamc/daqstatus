@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Edelweiss Samba Status</title>
+    <meta name="status of the latest configurations of the samba daq in edelweiss and the status of data processing" content="">
+    <meta name="Adam Cox, Michel Gros and Ed L. Weiss" content="">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+      <link rel="stylesheet" href="css/bootstrap1.4.0.css">    <style type="text/css">
+      /* Override some defaults */
+      html, body {
+        background-color: #eee;
+      }
+      body {
+        padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
+      }
+      .container > footer p {
+        text-align: center; /* center align it with the container */
+      }
+      .container {
+        width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
+      }
+
+      /* The white background content wrapper */
+      .content {
+        background-color: #fff;
+        padding: 20px;
+        margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+        -webkit-border-radius: 0 0 6px 6px;
+           -moz-border-radius: 0 0 6px 6px;
+                border-radius: 0 0 6px 6px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                box-shadow: 0 1px 2px rgba(0,0,0,.15);
+      }
+
+      /* Page header tweaks */
+      .page-header {
+        background-color: #f5f5f5;
+        padding: 20px 20px 10px;
+        margin: -20px -20px 20px;
+      }
+
+      /* Give a quick and non-cross-browser friendly divider */
+      .span4 {
+        margin-left: 0;
+        padding-left: 0px;
+        min-height:15px;
+        height:20px;
+      }
+      
+      .span2 {
+        margin-left: 0;
+        padding-left: 0px;
+        min-height:15px;
+        height:20px;
+      }
+      
+      .span3 {
+        margin-left: 0;
+        padding-left: 0px;
+        min-height:15px;
+        height:20px;
+      }
+      
+      .span5 {
+        margin-left: 0;
+        padding-left: 0px;
+        min-height:15px;
+        height:20px;
+      }
+      
+      .span6 {
+        margin-left: 0;
+        padding-left: 0px;
+        min-height:15px;
+        height:20px;
+      }
+
+      .span8 {
+        margin-left: 0;
+        padding-left: 0px;
+        min-height:15px;
+        height:20px;
+      }
+      
+      .topbar .btn {
+        border: 0;
+      }
+
+    </style>
+
+    <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.tmpl.min.js"></script>
+    <script type="text/javascript" src="js/jquery.couch.js"></script>
+    <script type="text/javascript" src="js/bootstrap-tabs.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="#">Edelweiss</a>
+          <ul class="nav">
+            <li class="active"><a href="#">Data Processing</a></li>
+            <li class="active"><a href="https://edwdbik.fzk.de:6984/automat/_design/cryo_2/index.html">Cryo Monitor</a></li>
+            <li class="active"><a href="https://edwdbik.fzk.de:6984/automat/_design/cryo_2/current.html">Cryo Status</a></li>
+            <li class="active"><a href="https://edwdbik.fzk.de:6984/radon/_design/app/index.html">RadonDB</a></li>
+            <li class="active"><a href="https://edwdbik.fzk.de:6984/ntdchar/_design/app/index.html">NTD Characteristics</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+          <!-- <h1>Samba Status<small>  The most recent Samba DAQ information</small></h1> -->
+          <h1>S.O.S<small>  the Status Of Samba</small></h1>
+        </div>
+        <div class="container">
+
+            <ul class="tabs" data-tabs="tabs">
+              <li class="active"><a href="#tab-samba-container">s1</a></li>
+              <li><a href="#tab-samba-container">s2</a></li>
+              <li><a href="#tab-samba-container">s3</a></li>
+              <li><a href="#tab-samba-container">s4</a></li>
+              <li><a href="#tab-samba-container">s5</a></li>
+              <li><a href="#tab-samba-container">s6</a></li>
+              <li><a href="#tab-samba-container">s7</a></li>
+              <li><a href="#tab-samba-container">s8</a></li>
+              <li><a href="#tab-selectrun-container">select run</a></li>
+            </ul>
+                    
+          <!-- define the samba tab -->
+          <div class="tab-content" id="my-tab-content">
+              <div class="active tab-pane" id="tab-samba-container"></div>
+              <div class="tab-pane" id="tab-selectrun-container">
+                <div class="clearfix"><input class="span2" id="selectRunInput" name="" type="text" placeholder="" /></div>  
+                <div><button class="btn primary span2" id="selectRunButton" >Primary</button></div>
+                <div class="container" id="selectrun-samba-container">
+              </div>
+          </div>
+          
+          
+        </div>
+      </div>
+      
+      
+      <!-- <div id="about-dialog" title="Entry submitted">
+              <p>Couchapp created by Adam Cox (adam.cox@kit.edu) at KIT.</p>
+            </div> -->
+      
+      <footer>
+        <p>&copy; Edelweiss Collaboration 2011</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>

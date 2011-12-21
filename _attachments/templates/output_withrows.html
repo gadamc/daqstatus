@@ -1,0 +1,220 @@
+
+
+<!-- Run Info -->
+
+
+<div class="row">
+  <div class="span2">Run Info</div>
+  {{if Heure}}
+  {{if Date}}
+    <div class="span2">Date</div>
+    <div class="span4">${Date.year}-${Date.month}-${Date.day} ${Heure}</div>
+  {{/if}}
+  {{/if}}
+</div>
+
+{{if run_name}}
+<div class="row">
+  <div class="span2"></div>
+  <div class="span2">Number</div>
+  {{if file_number}}
+    <div class="span4">${run_name}_${file_number}</div>
+  {{else}}
+    <div class="span4">${run_name}</div>
+  {{/if}}
+</div>
+{{/if}}
+
+
+{{if Condition}}
+<div class="row">
+  <div class="span2"></div>
+  <div class="span2">Condition</div>
+  <div class="span4">${Condition}</div>
+</div>
+{{/if}}
+
+{{if Type}}
+<div class="row">
+  <div class="span2"></div>
+  <div class="span2">Type</div>
+  <div class="span4">${Type}</div>
+</div>
+{{/if}}
+
+<div class="row">
+  <div class="span2"></div>
+  <div class="span2">Source Status</div>
+  {{if Source_1_calib}}
+  <div class="span3">Calib 1: ${Source_1_calib}</div>
+  {{/if}}
+  {{if Source_1_regen}}
+    <div class="span3">Regen 1: ${Source_1_regen}</div>
+  {{/if}}
+</div>
+{{if Source_2_calib}}
+<div class="row">
+  <div class="span2"></div>
+  <div class="span2"></div>
+  <div class="span3">Calib 2: ${Source_2_calib}</div>
+  {{if Source_2_regen}}
+    <div class="span3">Regen 2: ${Source_2_regen}</div>
+  {{/if}}
+</div>
+{{/if}}
+
+{{if Temperature}}
+<div class="row">
+  <div class="span2"></div>
+  <div class="span2">Temperature</div>
+  <div class="span4">${Temperature}</div>
+</div>
+{{/if}}
+
+<br>
+
+
+<!-- Samba Info -->
+<div class="row">
+  <div class="span2">Samba Info</div>
+  {{if Release}}
+  <div class="row">
+    <div class="span2">Release</div>
+    <div class="span4">${Release}</div>
+  </div>
+  {{/if}}
+</div>
+
+{{if Intitule}}
+<div class="row">
+  <div class="span2"></div>
+  <div class="span2">Title</div>
+  <div class="span4">${Intitule}</div>
+</div>
+{{/if}}
+
+{{if Donnees_source}}
+<div class="row">
+  <div class="span2"></div>
+  <div class="span2">Data Source</div>
+  <div class="span4">${Donnees_source}</div>
+</div>
+{{/if}}
+
+
+<div class="row">
+  <div class="span2"></div>
+  <div class="span2" style="height:40px">Initial Time Stamp</div>
+  <div class="span4">Giga: ${GigaStamp0}, Time: ${TimeStamp0}</div>
+</div>
+
+{{if Byte_order}}
+<div class="row">
+  <div class="span2"></div>
+  <div class="span2">Endian</div>
+  <div class="span4">${Byte_order}</div>
+</div>
+{{/if}}
+
+{{if status}}
+<div class="row">
+  <div class="span2"></div>
+  <div class="span2">Status</div>
+  <div class="span4">${status}</div>
+</div>
+{{/if}}
+
+
+<br>
+<!-- Detector Info -->
+{{if Detecteurs}}
+<div class="row">
+  <div class="span2">Detector Info</div>
+  <div class="span10">
+
+  {{each Detecteurs}}
+    <div class="row">
+      <div class="span2 detector-bolo divtocollapse">${$value.bolometer}</div>
+      <div class="iCanCollapse">        
+          <div class="row">
+            <div class="span8 detector-bolo">
+            {{each(key, val) $value}}
+              {{if key!="Bolo_reglages"}}
+                <div class="row">
+                  <div class="span2">${key}</div>
+                  <div class="span6">${val}</div>
+                </div>
+              {{else}}
+                <div class="row">
+                  <div class="span2 detector-bolo divtocollapse">${key}</div>
+                  <div class="iCanCollapse">
+                    <div class="row">
+                      <div class="span6 detector-bolo">
+                        {{each(brkey, brval) val}}
+                          <div class="row">
+                            <div class="span2">${brkey}</div>
+                            <div class="span4">${brval}</div>
+                          </div>
+                        {{/each}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br>
+              {{/if}}
+            {{/each}}
+            <br>
+          </div>
+          </div>
+        </div>
+    </div>
+  {{/each}}
+  
+  </div>  
+</div>
+
+
+
+{{/if}}
+
+<br>
+<!-- Channel Info -->
+{{if Voies}}
+<div class="row">
+  <div class="span2 divtocollapse">Channel Info</div>
+  <div class="span10 iCanCollapse"> 
+
+  {{each Voies}}
+    <div class="row">
+      <div class="span2 detector-bolo divtocollapse">${$value.Voie}</div>
+      <div class="iCanCollapse">        
+          <div class="row">
+            <div class="span8 detector-bolo">
+            {{each(key, val) $value}}
+                <div class="row">
+                  <div class="span4">${key}</div>
+                  <div class="span4">${val}</div>
+                </div>
+            {{/each}}
+            <br>
+          </div>
+          </div>
+        </div>
+    </div>
+  {{/each}}
+  
+  </div>
+</div>
+
+{{/if}}
+
+
+<br>
+
+<!-- Database Doc Info -->
+<div class="row">
+  <div class="span2">Gory Details</div>
+  <div class="span2">DB Doc ID</div>
+  <div class="span4">${_id} <a href = "../../${_id}"></div>
+  <div class="span4"> raw</a>&nbsp;<a href = "/_utils/document.html?datadb/${_id}">Futon</a></div>
+</div>

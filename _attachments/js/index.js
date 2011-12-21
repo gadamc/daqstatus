@@ -1,14 +1,7 @@
-
-//var db = $.couch.db('ntdchar');  //how do we automate this??? 
 var dbname = window.location.pathname.split("/")[1];
 var appName = window.location.pathname.split("/")[3];
 var db = $.couch.db(dbname);
-// 
-// //dear newbie, $ == jQuery, which is a reference to an instace of a jQuery object. You could replace
-// //every $ with 'jQuery' and you'd get the same functionality. 
-// 
-// var detailed  = false;
-// var collapsed = true;
+
 
 // ____________________________________________________________________________________
 $(document).ready(function(){

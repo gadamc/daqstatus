@@ -21,7 +21,7 @@ $(document).ready(function(){
        $.template("output_template", tmp);  
 
     });
-   
+   $("#tab-samba-container").animate({opacity:0.0}, 0);
    setSambaData('s1');
    
 });
@@ -42,7 +42,8 @@ function sanitize(obj){  //should I put this functionality into a show function 
 //_____________________________________________________________________________________
 function setSambaData(sambaName)
 {
-  
+   //$("#tab-samba-container").css("visibility", "hidden");
+   $("#tab-samba-container").animate({opacity:0.0}, 0);
    db.view(appName + "/samba",  {
                  key:sambaName,
                  reduce:false,
@@ -52,7 +53,7 @@ function setSambaData(sambaName)
                  success:function(data){ 
                      if ( data.rows.length > 0 ) {                       
                        $("#tab-samba-container").html( $.tmpl("output_template", sanitize( data.rows[0]['doc'] )));
-                       $('.detector-bolo').css("height", "auto")
+                       $('.autoheight').css("height", "auto")
                        $('.divtocollapse').css("color", "blue")
                        $('.iCanCollapse').hide();
                        $(".divtocollapse").click(function()
@@ -63,6 +64,7 @@ function setSambaData(sambaName)
                      else{
                        $("#tab-samba-container").html("<h5>no data available...</h5>")
                      }
+                     $("#tab-samba-container").animate({opacity:1.0}, 500);
                   },
                   error: function(req, textStatus, errorThrown){alert('Error '+ textStatus);}
           });

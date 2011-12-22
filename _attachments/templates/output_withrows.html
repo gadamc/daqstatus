@@ -236,10 +236,17 @@
                 </div>
               {{/if}}
               {{if key=="date"}}
+                {{if val.year}}
                 <div class="row">
                   <div class="span4 autoheight">${key}</div>
                   <div class="span4 autoheight">${val.year}-${val.month}-${val.day} ${val.hour}:${val.minute}:${val.second}</div>
                 </div>
+                {{else}}
+                <div class="row">
+                  <div class="span4 autoheight">${key}</div>
+                  <div class="span4 autoheight">${val}</div>
+                </div>
+                {{/if}}
               {{/if}}
             {{/each}}
             <br>
@@ -265,10 +272,17 @@
               </div>
             {{/if}}
             {{if key=="date"}}
+              {{if val.year}}
               <div class="row">
                 <div class="span4 autoheight">${key}</div>
                 <div class="span4 autoheight">${val.year}-${val.month}-${val.day} ${val.hour}:${val.minute}:${val.second}</div>
               </div>
+              {{else}}
+              <div class="row">
+                <div class="span4 autoheight">${key}</div>
+                <div class="span4 autoheight">${val}</div>
+              </div>
+              {{/if}}
             {{/if}}
           {{/each}}
           <br>
@@ -294,10 +308,17 @@
             </div>
           {{/if}}
           {{if key=="date"}}
+            {{if val.year}}
             <div class="row">
               <div class="span4 autoheight">${key}</div>
               <div class="span4 autoheight">${val.year}-${val.month}-${val.day} ${val.hour}:${val.minute}:${val.second}</div>
             </div>
+            {{else}}
+            <div class="row">
+              <div class="span4 autoheight">${key}</div>
+              <div class="span4 autoheight">${val}</div>
+            </div>
+            {{/if}}
           {{/if}}
         {{/each}}
         <br>
@@ -322,10 +343,17 @@
             </div>
           {{/if}}
           {{if key=="date"}}
+            {{if val.year}}
             <div class="row">
               <div class="span4 autoheight">${key}</div>
               <div class="span4 autoheight">${val.year}-${val.month}-${val.day} ${val.hour}:${val.minute}:${val.second}</div>
             </div>
+            {{else}}
+            <div class="row">
+              <div class="span4 autoheight">${key}</div>
+              <div class="span4 autoheight">${val}</div>
+            </div>
+            {{/if}}
           {{/if}}
         {{/each}}
         <br>

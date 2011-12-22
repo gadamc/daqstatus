@@ -21,7 +21,7 @@ $(document).ready(function(){
        $.template("output_template", tmp);  
 
     });
-   $("#tab-samba-container").animate({opacity:0.0}, 0);
+   //$("#tab-samba-container").animate({opacity:0.0}, 0);
    setSambaData('s1');
    
 });
@@ -43,7 +43,7 @@ function sanitize(obj){  //should I put this functionality into a show function 
 function setSambaData(sambaName)
 {
    //$("#tab-samba-container").css("visibility", "hidden");
-   $("#tab-samba-container").animate({opacity:0.0}, 0);
+   //$("#tab-samba-container").animate({opacity:0.0}, 0);
    db.view(appName + "/samba",  {
                  key:sambaName,
                  reduce:false,
@@ -64,7 +64,7 @@ function setSambaData(sambaName)
                      else{
                        $("#tab-samba-container").html("<h5>no data available...</h5>")
                      }
-                     $("#tab-samba-container").animate({opacity:1.0}, 0);
+                     //$("#tab-samba-container").animate({opacity:1.0}, 0);
                   },
                   error: function(req, textStatus, errorThrown){alert('Error '+ textStatus);}
           });

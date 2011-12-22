@@ -209,6 +209,165 @@
 {{/if}}
 
 
+<!-- Proc 0 -->
+
+<div class="row">
+  <div class="span2 divtocollapse">Data Processing</div>
+  <div class="span10 iCanCollapse"> 
+    {{if proc0}}
+    <div class="row">
+      <div class="span2 detector-bolo divtocollapse">proc0</div>
+      <div class="iCanCollapse">        
+          <div class="row">
+            <div class="span8 detector-bolo">
+            {{each(key, val) proc0}}
+              {{if key!="localuname" && key!="date"}}
+                <div class="row">
+                  <div class="span4 detector-bolo">${key}</div>
+                  <div class="span4 detector-bolo">${val}</div>
+                </div>
+              {{/if}}
+              {{if key=="date"}}
+                <div class="row">
+                  <div class="span4 detector-bolo">${key}</div>
+                  <div class="span4 detector-bolo">${val.year}-${val.month}-${val.day} ${val.hour}:${val.minute}:${val.second}</div>
+                </div>
+              {{/if}}
+            {{/each}}
+            <br>
+          </div>
+          </div>
+        </div>
+    </div>
+ 
+  {{/if}}
+  
+  
+  {{if proc1}}
+  <div class="row">
+    <div class="span2 detector-bolo divtocollapse">proc1</div>
+    <div class="iCanCollapse">        
+        <div class="row">
+          <div class="span8 detector-bolo">
+          {{each(key, val) proc1}}
+            {{if key!="localuname" && key!="date"}}
+              <div class="row">
+                <div class="span4 detector-bolo">${key}</div>
+                <div class="span4 detector-bolo">${val}</div>
+              </div>
+            {{/if}}
+            {{if key=="date"}}
+              <div class="row">
+                <div class="span4 detector-bolo">${key}</div>
+                <div class="span4 detector-bolo">${val.year}-${val.month}-${val.day} ${val.hour}:${val.minute}:${val.second}</div>
+              </div>
+            {{/if}}
+          {{/each}}
+          <br>
+        </div>
+        </div>
+      </div>
+  </div>
+
+{{/if}}
+
+
+{{if proc2}}
+<div class="row">
+  <div class="span2 detector-bolo divtocollapse">proc2</div>
+  <div class="iCanCollapse">        
+      <div class="row">
+        <div class="span8 detector-bolo">
+        {{each(key, val) proc2}}
+          {{if key!="localuname" && key!="date"}}
+            <div class="row">
+              <div class="span4 detector-bolo">${key}</div>
+              <div class="span4 detector-bolo">${val}</div>
+            </div>
+          {{/if}}
+          {{if key=="date"}}
+            <div class="row">
+              <div class="span4 detector-bolo">${key}</div>
+              <div class="span4 detector-bolo">${val.year}-${val.month}-${val.day} ${val.hour}:${val.minute}:${val.second}</div>
+            </div>
+          {{/if}}
+        {{/each}}
+        <br>
+      </div>
+      </div>
+    </div>
+</div>
+
+{{/if}}
+
+{{if proc3}}
+<div class="row">
+  <div class="span2 detector-bolo divtocollapse">proc3</div>
+  <div class="iCanCollapse">        
+      <div class="row">
+        <div class="span8 detector-bolo">
+        {{each(key, val) proc3}}
+          {{if key!="localuname" && key!="date"}}
+            <div class="row">
+              <div class="span4 detector-bolo">${key}</div>
+              <div class="span4 detector-bolo">${val}</div>
+            </div>
+          {{/if}}
+          {{if key=="date"}}
+            <div class="row">
+              <div class="span4 detector-bolo">${key}</div>
+              <div class="span4 detector-bolo">${val.year}-${val.month}-${val.day} ${val.hour}:${val.minute}:${val.second}</div>
+            </div>
+          {{/if}}
+        {{/each}}
+        <br>
+      </div>
+      </div>
+    </div>
+</div>
+
+{{/if}}
+
+  {{if proc0}}
+  <br>
+  {{/if}}
+  </div>
+</div>
+
+
+<!-- Batch Info -->
+{{if batchJob}}
+<div class="row">
+  <div class="span2 offset 2 divtocollapse">Batch Jobs</div>
+  <div class="span10 iCanCollapse"> 
+
+  {{each batchJob}}
+    <div class="row">
+      <div class="span2 detector-bolo divtocollapse">${$index}</div>
+      <div class="iCanCollapse">        
+          <div class="row">
+            <div class="span8 detector-bolo">
+            {{each(key, val) $value}}
+              {{if key!="command"}}
+                <div class="row">
+                  <div class="span4 detector-bolo">${key}</div>
+                  <div class="span4 detector-bolo">${val}</div>
+                </div>
+              {{/if}}
+            {{/each}}
+            <br>
+          </div>
+          </div>
+        </div>
+    </div>
+  {{/each}}
+  
+  </div>
+</div>
+
+{{/if}}
+
+
 <br>
 
 <!-- Database Doc Info -->

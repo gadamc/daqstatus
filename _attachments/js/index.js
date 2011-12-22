@@ -64,7 +64,7 @@ function setSambaData(sambaName)
                      else{
                        $("#tab-samba-container").html("<h5>no data available...</h5>")
                      }
-                     $("#tab-samba-container").animate({opacity:1.0}, 500);
+                     $("#tab-samba-container").animate({opacity:1.0}, 0);
                   },
                   error: function(req, textStatus, errorThrown){alert('Error '+ textStatus);}
           });

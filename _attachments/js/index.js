@@ -142,7 +142,7 @@ function getSambaData(sambaName)
 function getPreviousSambaData()
 {
   
-  console.log('get previous from ' + currentSamba + ' ' + currentRunName + ' ' + currentFileNumber);
+  //console.log('get previous from ' + currentSamba + ' ' + currentRunName + ' ' + currentFileNumber);
      
    db.view(appName + "/samba",  {
      endkey:[currentSamba,"", 0],
@@ -181,7 +181,7 @@ function getPreviousSambaData()
 function getNextSambaData()
 {
   
-   console.log('get next from ' + currentSamba + ' ' + currentRunName + ' ' + currentFileNumber);
+   //console.log('get next from ' + currentSamba + ' ' + currentRunName + ' ' + currentFileNumber);
    
    db.view(appName + "/samba",  {
      endkey:[currentSamba,"zz99z999",999999],

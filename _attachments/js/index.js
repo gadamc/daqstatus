@@ -2,6 +2,9 @@ var dbname = window.location.pathname.split("/")[1];
 var appName = window.location.pathname.split("/")[3];
 var db = $.couch.db(dbname);
 
+var currentRunName = "";
+var currentFileNumber = 0;
+var currentSamba = "";
 
 // ____________________________________________________________________________________
 $(document).ready(function(){
@@ -12,8 +15,7 @@ $(document).ready(function(){
    $('.tabs').bind('change', function (e) {
      setActivePane(e);  
      if(e.target.innerText != 'select run')        
-       setSambaData(e.target.innerText); 
-      
+       getSambaData(e.target.innerText); 
    });
    
    
@@ -22,6 +24,16 @@ $(document).ready(function(){
    
    $('#getRunButton').click( function(e) {
       getSelectData();
+   });
+   
+   $('#getPreviousRunButton').click( function(e) {
+     if( $('#getPreviousRunButton').hasClass('disabled') == false)
+      getPreviousSambaData();
+   });
+    
+   $('#getNextRunButton').click( function(e) {
+     if( $('#getNextRunButton').hasClass('disabled') == false)
+        getNextSambaData();
    }); 
      
    // Template - output
@@ -31,7 +43,7 @@ $(document).ready(function(){
     });
    
    
-   setSambaData('s1');
+   getSambaData('s1');
    
 });
 
@@ -66,7 +78,12 @@ function sanitize(obj){  //should I put this functionality into a show function 
 //---------------------------------
 function fillDataContainer(containerName, doc)
 {
-  $(containerName).html( $.tmpl("output_template", sanitize( doc )));
+  doc = sanitize( doc );
+  
+  $(containerName).html( $.tmpl("output_template",  doc ));
+  currentRunName = doc['run_name'];
+  currentFileNumber = doc['file_number'];
+   
   $('.autoheight').css("height", "auto")
   $('.divtocollapse').css("color", "blue")
   $('.iCanCollapse').hide();
@@ -77,24 +94,42 @@ function fillDataContainer(containerName, doc)
  
  
 //_____________________________________________________________________________________
-function setSambaData(sambaName)
+function getSambaData(sambaName)
 {
-   //$("#tab-samba-container").css("visibility", "hidden");
-   //$("#tab-samba-container").animate({opacity:0.0}, 0);
    
+   currentSamba = sambaName;
    
    db.view(appName + "/samba",  {
-     key:sambaName,
+     endkey:[sambaName,"", 0],
+     startkey:[sambaName,"zz99z999",999999],
      reduce:false,
-     limit:1,
+     limit:2,
      include_docs:true,
      descending:true,
      success:function(data){
        if ( data.rows.length > 0 ) {                     
          fillDataContainer("#tab-samba-container", data.rows[0]['doc']);
+        
+         if (data.rows.length > 1){
+           if( $('#getPreviousRunButton').hasClass('disabled') == true)
+               $('#getPreviousRunButton').removeClass('disabled');
+         }
+         else {
+           if( $('#getPreviousRunButton').hasClass('disabled') == false)
+                $('#getPreviousRunButton').addClass('disabled');
+         }
+         
+            
+         if( $('#getNextRunButton').hasClass('disabled') == false)
+            $('#getNextRunButton').addClass('disabled');
        }
        else{
          $("#tab-samba-container").html("<h5>no data available...</h5>");
+         
+         if( $('#getPreviousRunButton').hasClass('disabled') == false)
+            $('#getPreviousRunButton').addClass('disabled');
+         if( $('#getNextRunButton').hasClass('disabled') == false)
+            $('#getNextRunButton').addClass('disabled');
        }
      },
      error: function(req, textStatus, errorThrown){alert('Error '+ textStatus);}
@@ -102,6 +137,84 @@ function setSambaData(sambaName)
    });
 }
 
+
+//_____________________________________________________________________________________
+function getPreviousSambaData()
+{
+  
+  console.log('get previous from ' + currentSamba + ' ' + currentRunName + ' ' + currentFileNumber);
+     
+   db.view(appName + "/samba",  {
+     endkey:[currentSamba,"", 0],
+     startkey:[currentSamba,currentRunName,currentFileNumber],
+     reduce:false,
+     limit:3,
+     include_docs:true,
+     descending:true,
+     success:function(data){
+       if ( data.rows.length > 1 ) {                     
+         fillDataContainer("#tab-samba-container", data.rows[1]['doc']);
+         
+         if (data.rows.length > 2){
+            if( $('#getPreviousRunButton').hasClass('disabled') == true)
+                $('#getPreviousRunButton').removeClass('disabled');
+         }
+         else {
+            if( $('#getPreviousRunButton').hasClass('disabled') == false)
+                 $('#getPreviousRunButton').addClass('disabled');
+         }
+          
+         if( $('#getNextRunButton').hasClass('disabled') == true)
+            $('#getNextRunButton').removeClass('disabled');
+       }
+       else{
+          if( $('#getPreviousRunButton').hasClass('disabled') == false)
+            $('#getPreviousRunButton').addClass('disabled');
+       }
+     },
+     error: function(req, textStatus, errorThrown){alert('Error '+ textStatus);}
+    
+   });
+}
+
+//_____________________________________________________________________________________
+function getNextSambaData()
+{
+  
+   console.log('get next from ' + currentSamba + ' ' + currentRunName + ' ' + currentFileNumber);
+   
+   db.view(appName + "/samba",  {
+     endkey:[currentSamba,"zz99z999",999999],
+     startkey:[currentSamba,currentRunName,currentFileNumber],
+     reduce:false,
+     limit:3,
+     include_docs:true,
+     success:function(data){
+       if ( data.rows.length > 1 ) {                     
+         fillDataContainer("#tab-samba-container", data.rows[1]['doc']);
+         
+         if (data.rows.length > 2){
+           if( $('#getNextRunButton').hasClass('disabled') == true)
+               $('#getNextRunButton').removeClass('disabled');
+         }
+         else {
+           if( $('#getNextRunButton').hasClass('disabled') == false)
+                $('#getNextRunButton').addClass('disabled');
+         }
+         
+         if( $('#getPreviousRunButton').hasClass('disabled') == true)
+           $('#getPreviousRunButton').removeClass('disabled');
+       }
+       else{
+          if( $('#getNextRunButton').hasClass('disabled') == false)
+            $('#getNextRunButton').addClass('disabled');
+          
+       }
+     },
+     error: function(req, textStatus, errorThrown){alert('Error '+ textStatus);}
+    
+   });
+}
 
 
 //---------------------------------

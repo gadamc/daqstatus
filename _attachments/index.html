@@ -100,6 +100,7 @@
     <script type="text/javascript" src="js/jquery.tmpl.min.js"></script>
     <script type="text/javascript" src="js/jquery.couch.js"></script>
     <script type="text/javascript" src="js/bootstrap-tabs.js"></script>
+    <script type="text/javascript" src="js/bootstrap-buttons.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     
     <!-- Le fav and touch icons -->
@@ -150,12 +151,22 @@
                     
           <!-- define the samba tab -->
           <div class="tab-content" id="my-tab-content">
-              <div class="active tab-pane" id="tab-samba-container"></div>
-              <div class="tab-pane" id="tab-selectrun-container">
-                <div class="clearfix"><input class="span2" id="selectRunInput" name="" type="text" placeholder="" /></div>  
-                <div><button class="btn primary span2" id="selectRunButton" >Primary</button></div>
-                <div class="container" id="selectrun-samba-container">
+            
+              <div class="active tab-pane" id="tab-samba-pane">
+                  <div id="tab-samba-container"></div>
               </div>
+            
+              <div class="tab-pane" id="tab-selectrun-pane">
+                <div class="well" style="padding: 14px 19px;">
+                        <input class="span2" id="selectRunInput" name="" onkeydown="enter_select(event);" type="text" placeholder="ll21b001">&nbsp; </input>
+                        <input class="span2" id="selectFileInput" name="" onkeydown="enter_select(event);" type="text" placeholder="file number">&nbsp;
+                        <button class="btn primary" id='getRunButton'>Get Run</button>
+                        <small>  &nbsp; &nbsp; Returns latest run data if file number is empty</small>          
+                </div>
+              
+                <div id="selectrun-samba-container"></div>
+              </div>
+          
           </div>
           
           
@@ -168,7 +179,7 @@
             </div> -->
       
       <footer>
-        <p>&copy; Edelweiss Collaboration 2011</p>
+        <p>&copy; KIT 2011</p>
       </footer>
 
     </div> <!-- /container -->

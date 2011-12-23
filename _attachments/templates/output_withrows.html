@@ -139,7 +139,7 @@
   {{each Detecteurs}}
     <div class="row">
       <div class="span2 autoheight divtocollapse">${$value.bolometer}</div>
-      <div class="iCanCollapse">        
+      <div class="autoheight iCanCollapse">        
           <div class="row">
             <div class="span8 autoheight">
             {{each(key, val) $value}}
@@ -151,7 +151,7 @@
               {{else}}
                 <div class="row">
                   <div class="span2 autoheight divtocollapse">${key}</div>
-                  <div class="iCanCollapse">
+                  <div class="autoheight iCanCollapse">
                     <div class="row">
                       <div class="span6 autoheight">
                         {{each(brkey, brval) val}}
@@ -191,7 +191,7 @@
   {{each Voies}}
     <div class="row">
       <div class="span2 autoheight divtocollapse">${$value.Voie}</div>
-      <div class="iCanCollapse">        
+      <div class="autoheight iCanCollapse">        
           <div class="row">
             <div class="span8 autoheight">
             {{each(key, val) $value}}
@@ -221,7 +221,7 @@
     {{if proc0}}
     <div class="row">
       <div class="span2 autoheight divtocollapse">proc0</div>
-      <div class="iCanCollapse">        
+      <div class="autoheight iCanCollapse">        
           <div class="row">
             <div class="span8 autoheight">
             {{each(key, val) proc0}}
@@ -257,7 +257,7 @@
   {{if proc1}}
   <div class="row">
     <div class="span2 autoheight divtocollapse">proc1</div>
-    <div class="iCanCollapse">        
+    <div class="autoheight iCanCollapse">        
         <div class="row">
           <div class="span8 autoheight">
           {{each(key, val) proc1}}
@@ -293,7 +293,7 @@
 {{if proc2}}
 <div class="row">
   <div class="span2 autoheight divtocollapse">proc2</div>
-  <div class="iCanCollapse">        
+  <div class="autoheight iCanCollapse">        
       <div class="row">
         <div class="span8 autoheight">
         {{each(key, val) proc2}}
@@ -328,7 +328,7 @@
 {{if proc3}}
 <div class="row">
   <div class="span2 autoheight divtocollapse">proc3</div>
-  <div class="iCanCollapse">        
+  <div class="autoheight iCanCollapse">        
       <div class="row">
         <div class="span8 autoheight">
         {{each(key, val) proc3}}
@@ -376,7 +376,7 @@
   {{each batchJob}}
     <div class="row">
       <div class="span2 autoheight divtocollapse">${$index}</div>
-      <div class="iCanCollapse">        
+      <div class="span8 autoheight iCanCollapse">        
           <div class="row">
             <div class="span8 autoheight">
             {{each(key, val) $value}}

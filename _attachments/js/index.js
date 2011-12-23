@@ -48,6 +48,7 @@ function setActivePane(e)
    }
   
 }
+
 //-----------------------------
 function sanitize(obj){  //should I put this functionality into a show function on the server-side. it may be to have this option available elsewhere
    if(obj == null || typeof(obj) != 'object')

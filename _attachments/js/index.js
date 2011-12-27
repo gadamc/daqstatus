@@ -26,15 +26,30 @@ $(document).ready(function(){
       getSelectData();
    });
    
-   $('#getPreviousRunButton').click( function(e) {
-     if( $('#getPreviousRunButton').hasClass('disabled') == false)
+   $('#getLatestButton').click( function(e) {
+       getSambaData(currentSamba);
+    });
+    
+    
+   $('#getPreviousFileButton').click( function(e) {
+     if( $('#getPreviousFileButton').hasClass('disabled') == false)
       getPreviousSambaData();
    });
     
-   $('#getNextRunButton').click( function(e) {
-     if( $('#getNextRunButton').hasClass('disabled') == false)
+   $('#getNextFileButton').click( function(e) {
+     if( $('#getNextFileButton').hasClass('disabled') == false)
         getNextSambaData();
    }); 
+   
+    $('#getPreviousRunButton').click( function(e) {
+      if( $('#getPreviousRunButton').hasClass('disabled') == false)
+       getPreviousSambaRunData();
+    });
+
+    $('#getNextRunButton').click( function(e) {
+      if( $('#getNextRunButton').hasClass('disabled') == false)
+         getNextSambaRunData();
+    });
      
    // Template - output
     $.get('templates/output_withrows.html', function(tmp) {               
@@ -111,25 +126,30 @@ function getSambaData(sambaName)
          fillDataContainer("#tab-samba-container", data.rows[0]['doc']);
         
          if (data.rows.length > 1){
-           if( $('#getPreviousRunButton').hasClass('disabled') == true)
-               $('#getPreviousRunButton').removeClass('disabled');
+           if( $('#getPreviousFileButton').hasClass('disabled') == true)
+               $('#getPreviousFileButton').removeClass('disabled');
          }
          else {
-           if( $('#getPreviousRunButton').hasClass('disabled') == false)
-                $('#getPreviousRunButton').addClass('disabled');
+           if( $('#getPreviousFileButton').hasClass('disabled') == false)
+                $('#getPreviousFileButton').addClass('disabled');
          }
          
             
+         if( $('#getNextFileButton').hasClass('disabled') == false)
+            $('#getNextFileButton').addClass('disabled');
+        
+          
          if( $('#getNextRunButton').hasClass('disabled') == false)
             $('#getNextRunButton').addClass('disabled');
        }
        else{
          $("#tab-samba-container").html("<h5>no data available...</h5>");
          
-         if( $('#getPreviousRunButton').hasClass('disabled') == false)
-            $('#getPreviousRunButton').addClass('disabled');
-         if( $('#getNextRunButton').hasClass('disabled') == false)
-            $('#getNextRunButton').addClass('disabled');
+         if( $('#getPreviousFileButton').hasClass('disabled') == false)
+            $('#getPreviousFileButton').addClass('disabled');
+            
+         if( $('#getNextFileButton').hasClass('disabled') == false)
+            $('#getNextFileButton').addClass('disabled');
        }
      },
      error: function(req, textStatus, errorThrown){alert('Error '+ textStatus);}
@@ -156,20 +176,20 @@ function getPreviousSambaData()
          fillDataContainer("#tab-samba-container", data.rows[1]['doc']);
          
          if (data.rows.length > 2){
-            if( $('#getPreviousRunButton').hasClass('disabled') == true)
-                $('#getPreviousRunButton').removeClass('disabled');
+            if( $('#getPreviousFileButton').hasClass('disabled') == true)
+                $('#getPreviousFileButton').removeClass('disabled');
          }
          else {
-            if( $('#getPreviousRunButton').hasClass('disabled') == false)
-                 $('#getPreviousRunButton').addClass('disabled');
+            if( $('#getPreviousFileButton').hasClass('disabled') == false)
+                 $('#getPreviousFileButton').addClass('disabled');
          }
           
-         if( $('#getNextRunButton').hasClass('disabled') == true)
-            $('#getNextRunButton').removeClass('disabled');
+         if( $('#getNextFileButton').hasClass('disabled') == true)
+            $('#getNextFileButton').removeClass('disabled');
        }
        else{
-          if( $('#getPreviousRunButton').hasClass('disabled') == false)
-            $('#getPreviousRunButton').addClass('disabled');
+          if( $('#getPreviousFileButton').hasClass('disabled') == false)
+            $('#getPreviousFileButton').addClass('disabled');
        }
      },
      error: function(req, textStatus, errorThrown){alert('Error '+ textStatus);}
@@ -194,6 +214,90 @@ function getNextSambaData()
          fillDataContainer("#tab-samba-container", data.rows[1]['doc']);
          
          if (data.rows.length > 2){
+           if( $('#getNextFileButton').hasClass('disabled') == true)
+               $('#getNextFileButton').removeClass('disabled');
+         }
+         else {
+           if( $('#getNextFileButton').hasClass('disabled') == false)
+                $('#getNextFileButton').addClass('disabled');
+         }
+         
+         if( $('#getPreviousFileButton').hasClass('disabled') == true)
+           $('#getPreviousFileButton').removeClass('disabled');
+       }
+       else{
+          if( $('#getNextFileButton').hasClass('disabled') == false)
+            $('#getNextFileButton').addClass('disabled');
+          
+       }
+     },
+     error: function(req, textStatus, errorThrown){alert('Error '+ textStatus);}
+    
+   });
+}
+
+//_____________________________________________________________________________________
+function getPreviousSambaRunData()
+{
+  
+  //console.log('get previous from ' + currentSamba + ' ' + currentRunName + ' ' + currentFileNumber);
+     
+   db.view(appName + "/samba",  {
+     endkey:[currentSamba,"", 0],
+     startkey:[currentSamba,currentRunName,0],
+     reduce:false,
+     limit:3,
+     include_docs:true,
+     descending:true,
+     success:function(data){
+       if ( data.rows.length > 1 ) {                     
+         fillDataContainer("#tab-samba-container", data.rows[1]['doc']);
+         
+         if (data.rows.length > 2){
+            if( $('#getPreviousRunButton').hasClass('disabled') == true)
+                $('#getPreviousRunButton').removeClass('disabled');
+         }
+         else {
+            if( $('#getPreviousRunButton').hasClass('disabled') == false)
+                 $('#getPreviousRunButton').addClass('disabled');
+         }
+          
+         if( $('#getNextRunButton').hasClass('disabled') == true)
+            $('#getNextRunButton').removeClass('disabled');
+        
+         if( $('#getNextFileButton').hasClass('disabled') == true)
+            $('#getNextFileButton').removeClass('disabled');
+       }
+       else{
+          if( $('#getPreviousRunButton').hasClass('disabled') == false)
+            $('#getPreviousRunButton').addClass('disabled');
+        
+          if( $('#getPreviousFileButton').hasClass('disabled') == false)
+            $('#getPreviousFileButton').addClass('disabled');
+       }
+     },
+     error: function(req, textStatus, errorThrown){alert('Error '+ textStatus);}
+    
+   });
+}
+
+//_____________________________________________________________________________________
+function getNextSambaRunData()
+{
+  
+   //console.log('get next from ' + currentSamba + ' ' + currentRunName + ' ' + currentFileNumber);
+   
+   db.view(appName + "/samba",  {
+     endkey:[currentSamba,"zz99z999",999999],
+     startkey:[currentSamba,currentRunName,9999999],
+     reduce:false,
+     limit:3,
+     include_docs:true,
+     success:function(data){
+       if ( data.rows.length > 1 ) {                     
+         fillDataContainer("#tab-samba-container", data.rows[1]['doc']);
+         
+         if (data.rows.length > 2){
            if( $('#getNextRunButton').hasClass('disabled') == true)
                $('#getNextRunButton').removeClass('disabled');
          }
@@ -208,6 +312,9 @@ function getNextSambaData()
        else{
           if( $('#getNextRunButton').hasClass('disabled') == false)
             $('#getNextRunButton').addClass('disabled');
+            
+          if( $('#getNextFileButton').hasClass('disabled') == false)
+            $('#getNextFileButton').addClass('disabled');
           
        }
      },
@@ -215,7 +322,6 @@ function getNextSambaData()
     
    });
 }
-
 
 //---------------------------------
 function getSelectData()

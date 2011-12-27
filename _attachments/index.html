@@ -153,14 +153,21 @@
           <div class="tab-content" id="my-tab-content">
             
               <div class="active tab-pane" id="tab-samba-pane">
-                <div class="well" style="padding: 14px 19px;">
-                    <button class="btn primary" id='getPreviousRunButton'>Previous</button>
-                    <button class="btn primary" id='getNextRunButton'>Next</button>
-                </div>
                 <div id="tab-samba-container"></div>
+                <div class="well" style="padding: 14px 19px;">
+                    <button class="btn primary" id='getPreviousRunButton'>Previous Run</button>
+                    <button class="btn primary" id='getNextRunButton'>Next Run</button>
+                    &nbsp; &nbsp;
+                    <button class="btn success" id='getPreviousFileButton'>Previous File</button>
+                    <button class="btn success" id='getNextFileButton'>Next File</button>
+                    &nbsp; &nbsp;
+                    <button class="btn danger" id='getLatestButton'>Most Recent</button>
+                </div>
+                
               </div>
             
               <div class="tab-pane" id="tab-selectrun-pane">
+                <div id="selectrun-samba-container"></div>
                 <div class="well" style="padding: 14px 19px;">
                         <input class="span2" id="selectRunInput" name="" onkeydown="enter_select(event);" type="text" placeholder="ll21b001">&nbsp; </input>
                         <input class="span2" id="selectFileInput" name="" onkeydown="enter_select(event);" type="text" placeholder="file number">&nbsp;
@@ -168,7 +175,7 @@
                         <small>  &nbsp; &nbsp; Returns latest run data if file number is empty</small>          
                 </div>
               
-                <div id="selectrun-samba-container"></div>
+                
               </div>
           
           </div>
@@ -182,9 +189,9 @@
               <p>Couchapp created by Adam Cox (adam.cox@kit.edu) at KIT.</p>
             </div> -->
       
-      <!-- <footer>
-              <p>&copy; KIT 2011</p>
-            </footer> -->
+      <footer>
+         <p>&copy; KIT. <a href="http://en.wikipedia.org/wiki/All_your_base_are_belong_to_us">All your {data}base are belong to us.</a></p>
+      </footer>
 
     </div> <!-- /container -->
 

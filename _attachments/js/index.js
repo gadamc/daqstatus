@@ -6,6 +6,8 @@ var currentRunName = "";
 var currentFileNumber = 0;
 var currentSamba = "";
 
+var savedData = {};
+
 // ____________________________________________________________________________________
 $(document).ready(function(){
 
@@ -63,7 +65,15 @@ $(document).ready(function(){
    
    fillOverviewTable();
    
-   //getSambaData('s1');
+   //just run all of these to fill in the savedData on the initial load up!. 
+   getSambaData('s1');
+   getSambaData('s2');
+   getSambaData('s3');
+   getSambaData('s4');
+   getSambaData('s5');
+   getSambaData('s6');
+   getSambaData('s7');
+   getSambaData('s8');
    
 });
 
@@ -127,6 +137,8 @@ function getSambaData(sambaName)
 {
    
    currentSamba = sambaName;
+   if(savedData[sambaName])
+    fillDataContainer("#tab-samba-container", savedData[sambaName]);
    
    db.view(appName + "/samba",  {
      endkey:[sambaName,"", 0],
@@ -138,7 +150,8 @@ function getSambaData(sambaName)
      success:function(data){
        if ( data.rows.length > 0 ) {                     
          fillDataContainer("#tab-samba-container", data.rows[0]['doc']);
-        
+         savedData[sambaName] = data.rows[0]['doc'];
+         
          if (data.rows.length > 1){
            if( $('#getPreviousFileButton').hasClass('disabled') == true)
                $('#getPreviousFileButton').removeClass('disabled');
@@ -176,8 +189,7 @@ function getSambaData(sambaName)
 function getPreviousSambaData()
 {
   
-  //console.log('get previous from ' + currentSamba + ' ' + currentRunName + ' ' + currentFileNumber);
-     
+  
    db.view(appName + "/samba",  {
      endkey:[currentSamba,"", 0],
      startkey:[currentSamba,currentRunName,currentFileNumber],
@@ -188,7 +200,7 @@ function getPreviousSambaData()
      success:function(data){
        if ( data.rows.length > 1 ) {                     
          fillDataContainer("#tab-samba-container", data.rows[1]['doc']);
-         
+
          if (data.rows.length > 2){
             if( $('#getPreviousFileButton').hasClass('disabled') == true)
                 $('#getPreviousFileButton').removeClass('disabled');
@@ -358,6 +370,7 @@ function getSelectData()
       success:function(data){                     
          if ( data.rows.length > 0 ) {                     
             fillDataContainer("#selectrun-samba-container", data.rows[0]['doc']);
+            
           }
           else{
             $("#selectrun-samba-container").html("<h5>no data available...</h5>");
@@ -375,6 +388,7 @@ function getSelectData()
       success:function(data){                     
          if ( data.rows.length > 0 ) {                     
             fillDataContainer("#selectrun-samba-container", data.rows[0]['doc']);
+          
           }
           else{
             $("#selectrun-samba-container").html("<h5>no data available...</h5>");

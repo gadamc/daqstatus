@@ -7,6 +7,7 @@ var currentFileNumber = 0;
 var currentSamba = "";
 
 var savedData = {};
+var sambaList = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8'];
 
 // ____________________________________________________________________________________
 $(document).ready(function(){
@@ -66,14 +67,9 @@ $(document).ready(function(){
    fillOverviewTable();
    
    //just run all of these to fill in the savedData on the initial load up!. 
-   getSambaData('s1');
-   getSambaData('s2');
-   getSambaData('s3');
-   getSambaData('s4');
-   getSambaData('s5');
-   getSambaData('s6');
-   getSambaData('s7');
-   getSambaData('s8');
+   for (var i in sambaList)
+    getSambaData(sambaList[i]);
+  
    
 });
 
@@ -402,7 +398,7 @@ function getSelectData()
 //----------------------------------------------------
 function fillOverviewTable()
 {
-  var sambaList = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8'];
+  
   for (var i in sambaList){
     db.view(appName + "/sambaoverview",  {
        key:sambaList[i],

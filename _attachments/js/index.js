@@ -54,11 +54,12 @@ $(document).ready(function(){
    // Template - output
     $.get('templates/output_withrows.html', function(tmp) {               
        $.template("output_template", tmp);  
-
     });
+    
    
+   fillOverviewTable();
    
-   getSambaData('s1');
+   //getSambaData('s1');
    
 });
 
@@ -69,21 +70,30 @@ function setActivePane(e)
     $("#tab-samba-pane").toggleClass("active");
     $("#tab-selectrun-pane").toggleClass("active");
   }
-  else if(e.relatedTarget.innerText == 'select run'){
+  else if(e.target.innerText == 'overview'){
      $("#tab-samba-pane").toggleClass("active");
-     $("#tab-selectrun-pane").toggleClass("active");
+     $("#tab-overview-pane").toggleClass("active");
    }
+  else {
+    $("#tab-samba-pane").toggleClass("active");
+    
+    if (e.relatedTarget.innerText == 'select run')
+      $("#tab-selectrun-pane").toggleClass("active");
+      
+    if (e.relatedTarget.innerText == 'overview')
+      $("#tab-overview-pane").toggleClass("active");
+  }
   
 }
 
 //-----------------------------
-function sanitize(obj){  //should I put this functionality into a show function on the server-side. it may be to have this option available elsewhere
+function sanitize(obj){  //should I put this functionality into a show function on the server-side. it may be nice to have this option available elsewhere
    if(obj == null || typeof(obj) != 'object')
      return obj;
 
    var temp = obj.constructor(); 
    
-   var patt = new RegExp('[.-]','g');;
+   var patt = new RegExp('[.-]','g');
    for(var key in obj) 
      temp[key.replace(patt,'_')] = sanitize(obj[key]);
    return temp;
@@ -371,7 +381,38 @@ function getSelectData()
   }
 }
 
-/// ____________________________________________________________________________________
+//----------------------------------------------------
+function fillOverviewTable()
+{
+  var sambaList = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8'];
+  for (var i in sambaList){
+    db.view(appName + "/sambaoverview",  {
+       key:sambaList[i],
+       reduce:false,
+       limit:1,
+       include_docs:true,
+       descending:true,
+       success:function(data){
+         if ( data.rows.length > 0 ) {            
+           var row = '<tr>' 
+           row += '<td>'+data.rows[0]['key']+'</td>';
+           var date = data.rows[0]['value'][1];
+           row += '<td>'+ date.year +'-'+ date.month +'-'+ date.day +'- '+ data.rows[0]['value'][2]+'</td>';    
+           row += '<td>'+data.rows[0]['value'][0]+'</td>'
+           row += '<td>'+data.rows[0]['value'][3]+'</td>'   
+           $('#overview_table > tbody:last').append(row);
+         }
+         
+       },
+       error: function(req, textStatus, errorThrown){alert('Error '+ textStatus);}
+
+     });
+  } 
+  
+}
+
+
+// ____________________________________________________________________________________
 function enter_select(event) {    
  
    if (event.keyCode == 13) {  //keycode 13 is the enter key

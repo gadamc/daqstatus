@@ -138,7 +138,8 @@
         <div class="container">
 
             <ul class="tabs" data-tabs="tabs">
-              <li class="active"><a href="#tab-samba-container">s1</a></li>
+              <li class="active"><a href="#tab-overview-container">overview</a></li>
+              <li><a href="#tab-samba-container">s1</a></li>
               <li><a href="#tab-samba-container">s2</a></li>
               <li><a href="#tab-samba-container">s3</a></li>
               <li><a href="#tab-samba-container">s4</a></li>
@@ -152,7 +153,27 @@
           <!-- define the samba tab -->
           <div class="tab-content" id="my-tab-content">
             
-              <div class="active tab-pane" id="tab-samba-pane">
+            
+              <div class="active tab-pane" id="tab-overview-pane">
+                <div id="tab-overview-container">
+                  <table class="zebra-striped" id="overview_table">
+                            <thead>
+                              <tr>
+                                <th>Samba DAQ</th>
+                                <th>Latest Info<br>Date</th>
+                                <th><br>Run</th>
+                                <th><br>Condition</th>
+                              </tr>
+                            </thead>
+                            <tbody id="overview_table_body">
+                              <!-- to be filled in by javascript -->
+                            </tbody>
+                  </table>
+                </div>
+              </div>
+            
+            
+              <div class="tab-pane" id="tab-samba-pane">
                 <div id="tab-samba-container"></div>
                 <div class="well" style="padding: 14px 19px;">
                     <button class="btn primary" id='getPreviousRunButton'>Previous Run</button>
@@ -162,9 +183,9 @@
                     <button class="btn success" id='getNextFileButton'>Next File</button>
                     &nbsp; &nbsp;
                     <button class="btn danger" id='getLatestButton'>Most Recent</button>
-                </div>
-                
+                </div>    
               </div>
+            
             
               <div class="tab-pane" id="tab-selectrun-pane">
                 <div id="selectrun-samba-container"></div>
@@ -173,9 +194,7 @@
                         <input class="span2" id="selectFileInput" name="" onkeydown="enter_select(event);" type="text" placeholder="file number">&nbsp;
                         <button class="btn primary" id='getRunButton'>Get Run</button>
                         <small>  &nbsp; &nbsp; Returns latest run data if file number is empty</small>          
-                </div>
-              
-                
+                </div>  
               </div>
           
           </div>

@@ -57,6 +57,10 @@ $(document).ready(function(){
     });
     
    
+   //make table sortable and then fill it
+   
+   $("#overview_table").tablesorter( );
+   
    fillOverviewTable();
    
    //getSambaData('s1');
@@ -74,7 +78,7 @@ function setActivePane(e)
      $("#tab-samba-pane").toggleClass("active");
      $("#tab-overview-pane").toggleClass("active");
    }
-  else {
+  else if(e.relatedTarget.innerText == 'overview' || e.relatedTarget.innerText == 'select run'){
     $("#tab-samba-pane").toggleClass("active");
     
     if (e.relatedTarget.innerText == 'select run')
@@ -392,23 +396,29 @@ function fillOverviewTable()
        limit:1,
        include_docs:true,
        descending:true,
+       async:false,
        success:function(data){
          if ( data.rows.length > 0 ) {            
            var row = '<tr>' 
            row += '<td>'+data.rows[0]['key']+'</td>';
            var date = data.rows[0]['value'][1];
-           row += '<td>'+ date.year +'-'+ date.month +'-'+ date.day +'- '+ data.rows[0]['value'][2]+'</td>';    
+           row += '<td>'+ date.year +'-'+ date.month +'-'+ date.day +' '+ data.rows[0]['value'][2]+'</td>';    
            row += '<td>'+data.rows[0]['value'][0]+'</td>'
            row += '<td>'+data.rows[0]['value'][3]+'</td>'   
-           $('#overview_table > tbody:last').append(row);
+           $('#overview_table > tbody').append(row);
+           $("#overview_table").trigger("update");
+           var sorting = [[1,1]]; 
+           // sort on the second column 
+           $("#overview_table").trigger("sorton",[sorting]);
          }
          
        },
        error: function(req, textStatus, errorThrown){alert('Error '+ textStatus);}
 
      });
-  } 
-  
+  }
+   
+ 
 }
 
 

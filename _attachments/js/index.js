@@ -53,6 +53,10 @@ $(document).ready(function(){
       if( $('#getNextRunButton').hasClass('disabled') == false)
          getNextSambaRunData();
     });
+    
+    $('#refreshOverviewButton').click( function(e) {
+      refreshOverview();
+    });
      
    // Template - output
     $.get('templates/output_withrows.html', function(tmp) {               
@@ -409,19 +413,18 @@ function fillOverviewTable()
        async:false,
        success:function(data){
          if ( data.rows.length > 0 ) {            
-           var row = '<tr>' 
+           var row = '<tr class="overview_table_body_elements">' 
            row += '<td>'+data.rows[0]['key']+'</td>';
            var date = data.rows[0]['value'][1];
            row += '<td>'+ date.year +'-'+ date.month +'-'+ date.day +' '+ data.rows[0]['value'][2]+'</td>';    
            row += '<td>'+data.rows[0]['value'][0]+'</td>'
            row += '<td>'+data.rows[0]['value'][3]+'</td>'   
-           $('#overview_table > tbody').append(row);
-           $("#overview_table").trigger("update");
-           var sorting = [[1,1]]; 
-           // sort on the second column 
-           $("#overview_table").trigger("sorton",[sorting]);
+           $('#overview_table_body').append(row);
          }
-         
+         // $("#overview_table").tablesorter();
+         //         // var sorting = [[1,1]]; 
+         //         //          //sort on the second column 
+         //         //          $("#overview_table").trigger("sorton",[sorting]);
        },
        error: function(req, textStatus, errorThrown){alert('Error '+ textStatus);}
 
@@ -431,6 +434,12 @@ function fillOverviewTable()
  
 }
 
+//-------------------------------------------------
+function refreshOverview()
+{
+  $('#overview_table_body').empty();
+  fillOverviewTable();
+}
 
 // ____________________________________________________________________________________
 function enter_select(event) {    

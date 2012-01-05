@@ -17,8 +17,8 @@ $(document).ready(function(){
    
    $('.tabs').bind('change', function (e) {
      setActivePane(e);  
-     if(e.target.innerText != 'select run')        
-       getSambaData(e.target.innerText); 
+     if(e.target.innerHTML != 'select run')        
+       getSambaData(e.target.innerHTML); 
    });
    
    
@@ -80,22 +80,40 @@ $(document).ready(function(){
 //-----------------------------
 function setActivePane(e)
 {
-  if(e.target.innerText == 'select run'){
-    $("#tab-samba-pane").toggleClass("active");
-    $("#tab-selectrun-pane").toggleClass("active");
-  }
-  else if(e.target.innerText == 'overview'){
-     $("#tab-samba-pane").toggleClass("active");
-     $("#tab-overview-pane").toggleClass("active");
-   }
-  else if(e.relatedTarget.innerText == 'overview' || e.relatedTarget.innerText == 'select run'){
-    $("#tab-samba-pane").toggleClass("active");
+  if(e.target.innerHTML == 'select run'){
     
-    if (e.relatedTarget.innerText == 'select run')
-      $("#tab-selectrun-pane").toggleClass("active");
+    if($("#tab-samba-pane").hasClass("active"))
+      $("#tab-samba-pane").removeClass("active");
       
-    if (e.relatedTarget.innerText == 'overview')
-      $("#tab-overview-pane").toggleClass("active");
+    if($("#tab-overview-pane").hasClass("active"))
+      $("#tab-overview-pane").removeClass("active");
+        
+    if($("#tab-selectrun-pane").hasClass("active") == false)
+      $("#tab-selectrun-pane").addClass("active");
+    
+  }
+  else if(e.target.innerHTML == 'overview'){
+    
+     if($("#tab-samba-pane").hasClass("active"))
+       $("#tab-samba-pane").removeClass("active");
+
+     if($("#tab-selectrun-pane").hasClass("active"))
+       $("#tab-selectrun-pane").removeClass("active");
+
+     if($("#tab-overview-pane").hasClass("active") == false)
+       $("#tab-overview-pane").addClass("active");
+   }
+  else{
+    
+    if($("#tab-overview-pane").hasClass("active"))
+       $("#tab-overview-pane").removeClass("active");
+
+    if($("#tab-selectrun-pane").hasClass("active"))
+       $("#tab-selectrun-pane").removeClass("active");
+
+    if($("#tab-samba-pane").hasClass("active") == false)
+       $("#tab-samba-pane").addClass("active");
+       
   }
   
 }

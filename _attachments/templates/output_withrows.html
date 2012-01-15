@@ -226,12 +226,14 @@
           <div class="row">
             <div class="span8 autoheight">
             {{each(key, val) proc0}}
+              
               {{if key!="localuname" && key!="date"}}
                 <div class="row">
                   <div class="span4 autoheight">${key}</div>
                   <div class="span4 autoheight">${val}</div>
                 </div>
               {{/if}}
+              
               {{if key=="date"}}
                 {{if val.year}}
                 <div class="row">
@@ -245,6 +247,21 @@
                 </div>
                 {{/if}}
               {{/if}}
+              
+              {{if key=="exception"}}
+                <div class="row">
+                  <div class="span4 autoheight">Exceptions</div>
+                  <div class="span4 autoheight"></div>
+                </div>
+                {{each(exkey, exval) $val}}
+                <div class="row">
+                  <div class="span4 autoheight">${exkey}</div>
+                  <div class="span4 autoheight">${exval}</div>
+                </div>
+                {{/each}}  
+              {{/if}}
+              
+              
             {{/each}}
             <br>
           </div>
@@ -281,6 +298,20 @@
               </div>
               {{/if}}
             {{/if}}
+            
+            {{if key=="exception"}}
+              <div class="row">
+                <div class="span4 autoheight">Exceptions</div>
+                <div class="span4 autoheight"></div>
+              </div>
+              {{each(exkey, exval) $val}}
+              <div class="row">
+                <div class="span4 autoheight">${exkey}</div>
+                <div class="span4 autoheight">${exval}</div>
+              </div>
+              {{/each}}  
+            {{/if}}
+            
           {{/each}}
           <br>
         </div>
@@ -317,6 +348,20 @@
             </div>
             {{/if}}
           {{/if}}
+          
+          {{if key=="exception"}}
+            <div class="row">
+              <div class="span4 autoheight">Exceptions</div>
+              <div class="span4 autoheight"></div>
+            </div>
+            {{each(exkey, exval) $val}}
+            <div class="row">
+              <div class="span4 autoheight">${exkey}</div>
+              <div class="span4 autoheight">${exval}</div>
+            </div>
+            {{/each}}  
+          {{/if}}
+          
         {{/each}}
         <br>
       </div>
@@ -352,6 +397,20 @@
             </div>
             {{/if}}
           {{/if}}
+          
+          {{if key=="exception"}}
+            <div class="row">
+              <div class="span4 autoheight">Exceptions</div>
+              <div class="span4 autoheight"></div>
+            </div>
+            {{each(exkey, exval) $val}}
+            <div class="row">
+              <div class="span4 autoheight">${exkey}</div>
+              <div class="span4 autoheight">${exval}</div>
+            </div>
+            {{/each}}  
+          {{/if}}
+          
         {{/each}}
         <br>
       </div>

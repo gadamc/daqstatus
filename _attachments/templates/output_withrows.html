@@ -253,9 +253,9 @@
                   <div class="span4 autoheight">Exceptions</div>
                   <div class="span4 autoheight"></div>
                 </div>
-                {{each(exkey, exval) $val}}
+                {{each(exkey, exval) val}}
                 <div class="row">
-                  <div class="span4 autoheight">${exkey}</div>
+                  <div class="span2 offset2 autoheight">${exkey}</div>
                   <div class="span4 autoheight">${exval}</div>
                 </div>
                 {{/each}}  
@@ -301,15 +301,16 @@
             
             {{if key=="exception"}}
               <div class="row">
-                <div class="span4 autoheight">Exceptions</div>
-                <div class="span4 autoheight"></div>
+                <div class="span2 autoheight divtocollapse">Exception</div>
+                <div class="span6 autoheight iCanCollapse">
+                  {{each(exkey, exval) val}}
+                  <div class="row">
+                    <div class="span2 autoheight">${exkey}</div>
+                    <div class="span4 autoheight">${exval}</div>
+                  </div>
+                  {{/each}}
+                </div>  
               </div>
-              {{each(exkey, exval) $val}}
-              <div class="row">
-                <div class="span4 autoheight">${exkey}</div>
-                <div class="span4 autoheight">${exval}</div>
-              </div>
-              {{/each}}  
             {{/if}}
             
           {{/each}}
@@ -354,9 +355,9 @@
               <div class="span4 autoheight">Exceptions</div>
               <div class="span4 autoheight"></div>
             </div>
-            {{each(exkey, exval) $val}}
+            {{each(exkey, exval) val}}
             <div class="row">
-              <div class="span4 autoheight">${exkey}</div>
+              <div class="span2 offset2 autoheight">${exkey}</div>
               <div class="span4 autoheight">${exval}</div>
             </div>
             {{/each}}  
@@ -403,9 +404,9 @@
               <div class="span4 autoheight">Exceptions</div>
               <div class="span4 autoheight"></div>
             </div>
-            {{each(exkey, exval) $val}}
+            {{each(exkey, exval) val}}
             <div class="row">
-              <div class="span4 autoheight">${exkey}</div>
+              <div class="span2 offset2 autoheight">${exkey}</div>
               <div class="span4 autoheight">${exval}</div>
             </div>
             {{/each}}  

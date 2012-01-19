@@ -65,10 +65,9 @@ $(document).ready(function(){
     
    
    //make table sortable and then fill it
-   
    $("#overview_table").tablesorter( );
-   
-   fillOverviewTable();
+   //fillOverviewTable();
+   refreshOverview();
    
    //just run all of these to fill in the savedData on the initial load up!. 
    for (var i in sambaList)
@@ -430,7 +429,8 @@ function fillOverviewTable()
        descending:true,
        async:false,
        success:function(data){
-         if ( data.rows.length > 0 ) {            
+         if ( data.rows.length > 0 ) {  
+               
            var row = '<tr class="overview_table_body_elements">' 
            row += '<td>'+data.rows[0]['key']+'</td>';
            var date = data.rows[0]['value'][1];
@@ -438,27 +438,33 @@ function fillOverviewTable()
            row += '<td>'+data.rows[0]['value'][0]+'</td>'
            row += '<td>'+data.rows[0]['value'][3]+'</td>'   
            $('#overview_table_body').append(row);
+           
+           $("#overview_table").trigger("update");
+           
          }
-         // $("#overview_table").tablesorter();
-         //         // var sorting = [[1,1]]; 
-         //         //          //sort on the second column 
-         //         //          $("#overview_table").trigger("sorton",[sorting]);
        },
        error: function(req, textStatus, errorThrown){alert('Error '+ textStatus);}
 
      });
   }
-   
+  
  
 }
 
 //-------------------------------------------------
 function refreshOverview()
 {
-  $('#overview_table_body').empty();
+  
+  $('.overview_table_body_elements').remove();
   fillOverviewTable();
+  
+ 
 }
 
+function setTableSort()
+{
+  
+}
 // ____________________________________________________________________________________
 function enter_select(event) {    
  

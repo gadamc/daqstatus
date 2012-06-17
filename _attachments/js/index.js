@@ -79,7 +79,6 @@ $(document).ready(function(){
 //-----------------------------
 function setActivePane(e)
 {
-  console.log(e);
   
   if(e.target.innerHTML == 'select run'){
     
@@ -154,7 +153,6 @@ function fillDataContainer(containerName, doc)
 //_____________________________________________________________________________________
 function getSambaData(sambaName)
 {
-   console.log(sambaName);
    
    currentSamba = sambaName;
    if(savedData[sambaName])

@@ -13,9 +13,9 @@ var sambaList = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8'];
 $(document).ready(function(){
 
    // Tabs
-   $('.tabs').tabs();
+   //$('.tabs').tabs();
    
-   $('.tabs').bind('change', function (e) {
+   $('.nav-tabs').on('show', function (e) {
      setActivePane(e);  
      if(e.target.innerHTML != 'select run')        
        getSambaData(e.target.innerHTML); 
@@ -79,39 +79,41 @@ $(document).ready(function(){
 //-----------------------------
 function setActivePane(e)
 {
+  console.log(e);
+  
   if(e.target.innerHTML == 'select run'){
     
-    if($("#tab-samba-pane").hasClass("active"))
-      $("#tab-samba-pane").removeClass("active");
+    if($("#tab-samba-container").hasClass("active"))
+      $("#tab-samba-container").removeClass("active");
       
-    if($("#tab-overview-pane").hasClass("active"))
-      $("#tab-overview-pane").removeClass("active");
+    if($("#tab-overview-container").hasClass("active"))
+      $("#tab-overview-container").removeClass("active");
         
-    if($("#tab-selectrun-pane").hasClass("active") == false)
-      $("#tab-selectrun-pane").addClass("active");
+    if($("#tab-selectrun-container").hasClass("active") == false)
+      $("#tab-selectrun-container").addClass("active");
     
   }
   else if(e.target.innerHTML == 'overview'){
     
-     if($("#tab-samba-pane").hasClass("active"))
-       $("#tab-samba-pane").removeClass("active");
+     if($("#tab-samba-container").hasClass("active"))
+       $("#tab-samba-container").removeClass("active");
 
-     if($("#tab-selectrun-pane").hasClass("active"))
-       $("#tab-selectrun-pane").removeClass("active");
+     if($("#tab-selectrun-container").hasClass("active"))
+       $("#tab-selectrun-container").removeClass("active");
 
-     if($("#tab-overview-pane").hasClass("active") == false)
-       $("#tab-overview-pane").addClass("active");
+     if($("#tab-overview-container").hasClass("active") == false)
+       $("#tab-overview-container").addClass("active");
    }
   else{
     
-    if($("#tab-overview-pane").hasClass("active"))
-       $("#tab-overview-pane").removeClass("active");
+    if($("#tab-overview-container").hasClass("active"))
+       $("#tab-overview-container").removeClass("active");
 
-    if($("#tab-selectrun-pane").hasClass("active"))
-       $("#tab-selectrun-pane").removeClass("active");
+    if($("#tab-selectrun-container").hasClass("active"))
+       $("#tab-selectrun-container").removeClass("active");
 
-    if($("#tab-samba-pane").hasClass("active") == false)
-       $("#tab-samba-pane").addClass("active");
+    if($("#tab-samba-container").hasClass("active") == false)
+       $("#tab-samba-container").addClass("active");
        
   }
   
@@ -152,10 +154,11 @@ function fillDataContainer(containerName, doc)
 //_____________________________________________________________________________________
 function getSambaData(sambaName)
 {
+   console.log(sambaName);
    
    currentSamba = sambaName;
    if(savedData[sambaName])
-    fillDataContainer("#tab-samba-container", savedData[sambaName]);
+    fillDataContainer("#tab-samba-datacontainer", savedData[sambaName]);
    
    db.view(appName + "/samba",  {
      endkey:[sambaName,"", 0],
@@ -166,7 +169,7 @@ function getSambaData(sambaName)
      descending:true,
      success:function(data){
        if ( data.rows.length > 0 ) {                     
-         fillDataContainer("#tab-samba-container", data.rows[0]['doc']);
+         fillDataContainer("#tab-samba-datacontainer", data.rows[0]['doc']);
          savedData[sambaName] = data.rows[0]['doc'];
          
          if (data.rows.length > 1){
@@ -187,7 +190,7 @@ function getSambaData(sambaName)
             $('#getNextRunButton').addClass('disabled');
        }
        else{
-         $("#tab-samba-container").html("<h5>no data available...</h5>");
+         $("#tab-samba-datacontainer").html("<h5>no data available...</h5>");
          
          if( $('#getPreviousFileButton').hasClass('disabled') == false)
             $('#getPreviousFileButton').addClass('disabled');
@@ -216,7 +219,7 @@ function getPreviousSambaData()
      descending:true,
      success:function(data){
        if ( data.rows.length > 1 ) {                     
-         fillDataContainer("#tab-samba-container", data.rows[1]['doc']);
+         fillDataContainer("#tab-samba-datacontainer", data.rows[1]['doc']);
 
          if (data.rows.length > 2){
             if( $('#getPreviousFileButton').hasClass('disabled') == true)
@@ -254,7 +257,7 @@ function getNextSambaData()
      include_docs:true,
      success:function(data){
        if ( data.rows.length > 1 ) {                     
-         fillDataContainer("#tab-samba-container", data.rows[1]['doc']);
+         fillDataContainer("#tab-samba-datacontainer", data.rows[1]['doc']);
          
          if (data.rows.length > 2){
            if( $('#getNextFileButton').hasClass('disabled') == true)
@@ -294,7 +297,7 @@ function getPreviousSambaRunData()
      descending:true,
      success:function(data){
        if ( data.rows.length > 1 ) {                     
-         fillDataContainer("#tab-samba-container", data.rows[1]['doc']);
+         fillDataContainer("#tab-samba-datacontainer", data.rows[1]['doc']);
          
          if (data.rows.length > 2){
             if( $('#getPreviousRunButton').hasClass('disabled') == true)
@@ -338,7 +341,7 @@ function getNextSambaRunData()
      include_docs:true,
      success:function(data){
        if ( data.rows.length > 1 ) {                     
-         fillDataContainer("#tab-samba-container", data.rows[1]['doc']);
+         fillDataContainer("#tab-samba-datacontainer", data.rows[1]['doc']);
          
          if (data.rows.length > 2){
            if( $('#getNextRunButton').hasClass('disabled') == true)
@@ -386,7 +389,7 @@ function getSelectData()
       include_docs:true,
       success:function(data){                     
          if ( data.rows.length > 0 ) {                     
-            fillDataContainer("#selectrun-samba-container", data.rows[0]['doc']);
+            fillDataContainer("#selectrun-samba-datacontainer", data.rows[0]['doc']);
             
           }
           else{
@@ -404,7 +407,7 @@ function getSelectData()
       include_docs:true,
       success:function(data){                     
          if ( data.rows.length > 0 ) {                     
-            fillDataContainer("#selectrun-samba-container", data.rows[0]['doc']);
+            fillDataContainer("#selectrun-samba-datacontainer", data.rows[0]['doc']);
           
           }
           else{

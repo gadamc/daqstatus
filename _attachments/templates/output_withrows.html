@@ -59,13 +59,17 @@
 </div>
 {{/if}}
 
-{{if Temperature}}
+
 <div class="row">
   <div class="span2"></div>
   <div class="span2">Temperature</div>
+{{if Temperature}}
   <div class="span4">${Temperature}</div>
-</div>
+  {{else}}
+  <div class="span4">0.0</div>
 {{/if}}
+</div>
+
 
 <br>
 

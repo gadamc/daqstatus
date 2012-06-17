@@ -12,7 +12,9 @@
     <![endif]-->
 
     <!-- Le styles -->
-      <link rel="stylesheet" href="css/bootstrap1.4.0.css">    <style type="text/css">
+      <link rel="stylesheet" href="css/bootstrap.min.css">    
+      <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+      <style type="text/css">
       /* Override some defaults */
       html, body {
         background-color: #eee;
@@ -23,9 +25,7 @@
       .container > footer p {
         text-align: center; /* center align it with the container */
       }
-      .container {
-        width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
-      }
+      
 
       /* The white background content wrapper */
       .content {
@@ -50,42 +50,42 @@
       /* Give a quick and non-cross-browser friendly divider */
       .span4 {
         margin-left: 0;
-        padding-left: 0px;
+        padding-left: 20px;
         min-height:15px;
-        height:20px;
+        height:20px
       }
       
       .span2 {
         margin-left: 0;
-        padding-left: 0px;
+        padding-left: 20px;
         min-height:15px;
         height:20px;
       }
       
       .span3 {
         margin-left: 0;
-        padding-left: 0px;
+        padding-left: 20px;
         min-height:15px;
         height:20px;
       }
       
       .span5 {
         margin-left: 0;
-        padding-left: 0px;
+        padding-left: 20px;
         min-height:15px;
         height:20px;
       }
       
       .span6 {
         margin-left: 0;
-        padding-left: 0px;
+        padding-left: 20px;
         min-height:15px;
         height:20px;
       }
 
       .span8 {
         margin-left: 0;
-        padding-left: 0px;
+        padding-left: 20px;
         min-height:15px;
         height:20px;
       }
@@ -96,13 +96,7 @@
 
     </style>
 
-    <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
-    <script type="text/javascript" src="js/jquery.tmpl.min.js"></script>
-    <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
-    <script type="text/javascript" src="js/jquery.couch.js"></script>
-    <script type="text/javascript" src="js/bootstrap-tabs.js"></script>
-    <script type="text/javascript" src="js/bootstrap-buttons.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
+
     
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="images/favicon.ico">
@@ -114,16 +108,17 @@
 
   <body>
 
-    <div class="topbar">
-      <div class="fill">
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
         <div class="container">
           <a class="brand" href="#">Edelweiss</a>
           <ul class="nav">
             <!-- <li class="active"><a href="#">Data Processing</a></li> -->
-            <li class="active"><a href="https://edwdbik.fzk.de:6984/automat/_design/cryo_2/index.html">Cryo Monitor</a></li>
-            <li class="active"><a href="https://edwdbik.fzk.de:6984/automat/_design/cryo_2/current.html">Cryo Status</a></li>
-            <li class="active"><a href="https://edwdbik.fzk.de:6984/radon/_design/app/index.html">RadonDB</a></li>
-            <li class="active"><a href="https://edwdbik.fzk.de:6984/ntdchar/_design/app/index.html">NTD Characteristics</a></li>
+            <li ><a href="http://edwdbik.fzk.de:5984/muonhv/_design/app/index.html">Muon Veto HV Monitor</a></li>
+            <li ><a href="http://edwdbik.fzk.de:5984/automat/_design/cryo_2/index.html">Cryo History</a></li>
+            <li ><a href="http://edwdbik.fzk.de:5984/automat/_design/cryo_2/current.html">Cryo Status</a></li>
+            <li ><a href="http://edwdbik.fzk.de:5984/radon/_design/app/index.html">Radon Monitor</a></li>
+            <li ><a href="http://edwdbik.fzk.de:5984/ntdchar/_design/app/index.html">NTD Characteristics</a></li>
           </ul>
         </div>
       </div>
@@ -132,76 +127,75 @@
     <div class="container">
 
       <div class="content">
+        
         <div class="page-header">
           <!-- <h1>Samba Status<small>  The most recent Samba DAQ information</small></h1> -->
           <h1>S.S. Edelweiss<small>  &nbsp; &nbsp; Samba Status in Edelweiss</small></h1>
         </div>
+        
         <div class="container">
-
-            <ul class="tabs" data-tabs="tabs">
-              <li class="active"><a href="#tab-overview-container">overview</a></li>
-              <li><a href="#tab-samba-container">s1</a></li>
-              <li><a href="#tab-samba-container">s2</a></li>
-              <li><a href="#tab-samba-container">s3</a></li>
-              <li><a href="#tab-samba-container">s4</a></li>
-              <li><a href="#tab-samba-container">s5</a></li>
-              <li><a href="#tab-samba-container">s6</a></li>
-              <li><a href="#tab-samba-container">s7</a></li>
-              <li><a href="#tab-samba-container">s8</a></li>
-              <li><a href="#tab-selectrun-container">select run</a></li>
+          <div class="tabbable">
+            <ul class="nav nav-tabs" id="mytab">
+              <li class="active"><a href="#tab-overview-container" data-toggle="tab" >overview</a></li>
+              <li><a href="#tab-samba-container" data-toggle="tab">s1</a></li>
+              <li><a href="#tab-samba-container" data-toggle="tab">s2</a></li>
+              <li><a href="#tab-samba-container" data-toggle="tab">s3</a></li>
+              <li><a href="#tab-samba-container" data-toggle="tab">s4</a></li>
+              <li><a href="#tab-samba-container" data-toggle="tab">s5</a></li>
+              <li><a href="#tab-samba-container" data-toggle="tab">s6</a></li>
+              <li><a href="#tab-samba-container" data-toggle="tab">s7</a></li>
+              <li><a href="#tab-samba-container" data-toggle="tab">s8</a></li>
+              <li><a href="#tab-selectrun-container" data-toggle="tab">select run</a></li>
             </ul>
                     
-          <!-- define the samba tab -->
-          <div class="tab-content" id="my-tab-content">
+            <!-- define the samba tab -->
+            <div class="tab-content" >
             
-            
-              <div class="active tab-pane" id="tab-overview-pane">
-                <div id="tab-overview-container">
-                  <table class="" id="overview_table">
-                            <thead>
-                              <tr>
-                                <th>Samba DAQ</th>
-                                <th>Latest Info<br>Date</th>
-                                <th><br>Run</th>
-                                <th><br>Condition</th>
-                              </tr>
-                            </thead>
-                            <tbody id="overview_table_body">
-                              <!-- to be filled in by javascript -->
-                            </tbody>
+              <div class="active tab-pane" id="tab-overview-container">
+                  <table class="table" id="overview_table">
+                    <thead>
+                      <tr>
+                        <th>Samba DAQ</th>
+                        <th>Latest Info<br>Date</th>
+                        <th><br>Run</th>
+                        <th><br>Condition</th>
+                      </tr>
+                    </thead>
+                    <tbody id="overview_table_body">
+                      <!-- to be filled in by javascript -->
+                    </tbody>
                   </table>
-                </div>
-                <button class="btn primary" id='refreshOverviewButton'>Refresh</button>
+                <button class="btn" data-toggle="button" id='refreshOverviewButton'>Refresh</button>
               </div>
             
             
-              <div class="tab-pane" id="tab-samba-pane">
-                <div id="tab-samba-container"></div>
+              <div class="tab-pane" id="tab-samba-container">
+                <div id="tab-samba-datacontainer"></div>
                 <br>
                 <div class="well" style="padding: 14px 19px;">
-                    <button class="btn primary" id='getPreviousRunButton'>Previous Run</button>
-                    <button class="btn primary" id='getNextRunButton'>Next Run</button>
+                    <button class="btn" data-toggle="button" id='getPreviousRunButton'>Previous Run</button>
+                    <button class="btn" data-toggle="button" id='getNextRunButton'>Next Run</button>
                     &nbsp; &nbsp;
-                    <button class="btn success" id='getPreviousFileButton'>Previous File</button>
-                    <button class="btn success" id='getNextFileButton'>Next File</button>
+                    <button class="btn" data-toggle="button" id='getPreviousFileButton'>Previous File</button>
+                    <button class="btn" data-toggle="button" id='getNextFileButton'>Next File</button>
                     &nbsp; &nbsp;
-                    <button class="btn danger" id='getLatestButton'>Most Recent</button>
+                    <button class="btn" data-toggle="button" id='getLatestButton'>Most Recent</button>
                 </div>    
               </div>
             
             
-              <div class="tab-pane" id="tab-selectrun-pane">
-                <div id="selectrun-samba-container"></div>
+              <div class="tab-pane" id="tab-selectrun-container">
+                <div id="selectrun-samba-datacontainer"></div>
                 <div class="well" style="padding: 14px 19px;">
                         <input class="span2" id="selectRunInput" name="" onkeydown="enter_select(event);" type="text" placeholder="ll21b001">&nbsp; </input>
                         <input class="span2" id="selectFileInput" name="" onkeydown="enter_select(event);" type="text" placeholder="file number">&nbsp;
-                        <button class="btn primary" id='getRunButton'>Get Run</button>
+                        <button class="btn" data-toggle="button" id='getRunButton'>Get Run</button>
                         <small>  &nbsp; &nbsp; Returns latest run data if file number is empty</small>          
                 </div>  
               </div>
           
           </div>
-          
+          </div>
           
         </div>
       </div>
@@ -217,5 +211,13 @@
 
     </div> <!-- /container -->
 
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.tmpl.min.js"></script>
+    <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="js/jquery.couch.js"></script>
+    <script type="text/javascript" src="js/bootstrap-tab.js"></script>
+    <script type="text/javascript" src="js/bootstrap-button.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    
   </body>
 </html>

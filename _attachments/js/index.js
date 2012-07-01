@@ -196,8 +196,7 @@ function getSambaData(sambaName)
          if( $('#getNextFileButton').hasClass('disabled') == false)
             $('#getNextFileButton').addClass('disabled');
        }
-     },
-     error: function(req, textStatus, errorThrown){alert('Error '+ textStatus);}
+     }
     
    });
 }
@@ -235,8 +234,7 @@ function getPreviousSambaData()
           if( $('#getPreviousFileButton').hasClass('disabled') == false)
             $('#getPreviousFileButton').addClass('disabled');
        }
-     },
-     error: function(req, textStatus, errorThrown){alert('Error '+ textStatus);}
+     }
     
    });
 }
@@ -274,8 +272,7 @@ function getNextSambaData()
             $('#getNextFileButton').addClass('disabled');
           
        }
-     },
-     error: function(req, textStatus, errorThrown){alert('Error '+ textStatus);}
+     }
     
    });
 }
@@ -319,8 +316,7 @@ function getPreviousSambaRunData()
           if( $('#getPreviousFileButton').hasClass('disabled') == false)
             $('#getPreviousFileButton').addClass('disabled');
        }
-     },
-     error: function(req, textStatus, errorThrown){alert('Error '+ textStatus);}
+     }
     
    });
 }
@@ -361,8 +357,7 @@ function getNextSambaRunData()
             $('#getNextFileButton').addClass('disabled');
           
        }
-     },
-     error: function(req, textStatus, errorThrown){alert('Error '+ textStatus);}
+     }
     
    });
 }
@@ -393,8 +388,7 @@ function getSelectData()
           else{
             $("#selectrun-samba-container").html("<h5>no data available...</h5>");
           }
-       },
-       error: function(req, textStatus, errorThrown){alert('Error '+ textStatus);}
+       }
     });
     
   }
@@ -411,8 +405,7 @@ function getSelectData()
           else{
             $("#selectrun-samba-container").html("<h5>no data available...</h5>");
           }
-       },
-       error: function(req, textStatus, errorThrown){alert('Error '+ textStatus);}
+       }
     });
   }
 }
@@ -443,8 +436,7 @@ function fillOverviewTable()
            $("#overview_table").trigger("update");
            
          }
-       },
-       error: function(req, textStatus, errorThrown){alert('Error '+ textStatus);}
+       }
 
      });
   }

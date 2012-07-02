@@ -12,6 +12,24 @@ var sambaList = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8'];
 // ____________________________________________________________________________________
 $(document).ready(function(){
 
+
+  //fill in the nav bar at the top of the page
+  //using info in the webinterface database
+  $.couch.db("webinterface").openDoc("navbar", {
+    success: function(data) {
+      console.log(data);
+      var items = [];
+
+      for (var link in data['list']){
+        console.log(link + data['list'][link]);
+        items.push('<li ><a href="' + link + '">' + data['list'][link] + '</a></li>');
+      }
+      console.log(items);
+      $('#navbarList').append( items.join('') );
+
+    }
+  });
+  
    // Tabs
    //$('.tabs').tabs();
    

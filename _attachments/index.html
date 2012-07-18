@@ -147,6 +147,7 @@
               <li><a href="#tab-samba-container" data-toggle="tab">s7</a></li>
               <li><a href="#tab-samba-container" data-toggle="tab">s8</a></li>
               <li><a href="#tab-selectrun-container" data-toggle="tab">select run</a></li>
+              <li><a href="#tab-bolosettings-container" data-toggle="tab">bolo settings</a></li>
             </ul>
                     
             <!-- define the samba tab -->
@@ -193,6 +194,59 @@
                         <button class="btn"  id='getRunButton'>Get Run</button>
                         <small>  &nbsp; &nbsp; Returns latest run data if file number is empty</small>          
                 </div>  
+              </div>
+
+              <div class="tab-pane" id="tab-bolosettings-container">
+                <h3>Most Recent Polarities</h3>
+                <table class="table tablesorter table-condensed bolosettings-table" id="bolosettings-table-polar">
+                <thead>
+                  <tr>
+                    <th style="width: 10%">Bolometer</th>
+                    <th style="width: 10%">Run</th>
+                    <th style="width: 10%">ionisA</th>
+                    <th style="width: 10%">ionisB</th>
+                    <th style="width: 10%">ionisC</th>
+                    <th style="width: 10%">ionisD</th>
+                  </tr>
+                </thead>
+                <tbody id="bolosettings-body-polar">
+                  <!-- to be filled in by javascript -->
+                </tbody>
+                </table>
+                <br>
+                <br>
+                <h3>Most Recent Gain Settings</h3>
+                <table class="table tablesorter table-condensed bolosettings-table" id="bolosettings-table-gain">
+                <thead>
+                  <tr>
+                    <th style="width: 10%">Bolometer</th>
+                    <th style="width: 10%">Run</th>
+                    <th style="width: 10%">ionisA</th>
+                    <th style="width: 10%">ionisB</th>
+                    <th style="width: 10%">ionisC</th>
+                    <th style="width: 10%">ionisD</th>
+                  </tr>
+                </thead>
+                <tbody id="bolosettings-body-gain">
+                  <!-- to be filled in by javascript -->
+                </tbody>
+                </table>
+                <br>
+                <br>
+                <h3>Most Recent Heat Ampl</h3>
+                <table class="table tablesorter table-condensed bolosettings-table" id="bolosettings-table-ampl">
+                <thead>
+                  <tr>
+                    <th style="width: 10%">Bolometer</th>
+                    <th style="width: 10%">Run</th>
+                    <th style="width: 10%">chalA</th>
+                    <th style="width: 10%">chalB</th>
+                  </tr>
+                </thead>
+                <tbody id="bolosettings-body-ampl">
+                  <!-- to be filled in by javascript -->
+                </tbody>
+                </table>
               </div>
           
           </div>

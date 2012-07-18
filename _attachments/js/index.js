@@ -88,6 +88,13 @@ $(document).ready(function(){
    for (var i in sambaList)
     getSambaData(sambaList[i]);
   
+
+  //make table sortable and then fill it
+   $("#bolosettings-table-polar").tablesorter( );
+   $("#bolosettings-table-gain").tablesorter( );
+   $("#bolosettings-table-ampl").tablesorter( );
+
+   fillBoloSettings();
    
 });
 
@@ -444,7 +451,7 @@ function fillOverviewTable()
            var date = data.rows[0]['value'][1];
            row += '<td>'+ date.year +'-'+ date.month +'-'+ date.day +' '+ data.rows[0]['value'][2]+'</td>';    
            row += '<td>'+data.rows[0]['value'][0]+'</td>'
-           row += '<td>'+data.rows[0]['value'][3]+'</td>'   
+           row += '<td>'+data.rows[0]['value'][3]+'</td></tr>'   
            $('#overview_table_body').append(row);
            
            $("#overview_table").trigger("update");
@@ -486,3 +493,79 @@ function enter_select(event) {
    return false;     
         
 }
+
+//-------------------------------------------------
+function fillBoloSettings()
+{
+
+  db.view(appName + "/boloParams",  {
+    group_level:1,
+    reduce:true,
+    success:function(data){
+
+      var dataTypes = ["polar", "gain", "ampl"];
+
+      for ( var boloRow in data.rows ) {  
+        
+        if (data.rows[boloRow]['key'][0] == "veto") continue;
+
+        db.view(appName + "/boloParams", {
+          startkey : [data.rows[boloRow]['key'][0], "zz99z999",999],
+          endkey : [data.rows[boloRow]['key'][0], "",0],
+          reduce:false,
+          descending:true,
+          limit:1,
+          success:function(singleData){
+
+            var params = singleData.rows[0]["value"];
+            var boloname = singleData.rows[0]["key"][0];
+            var runName = singleData.rows[0]["key"][1] + "_" + singleData.rows[0]["key"][2];  
+
+            for (var key in dataTypes){
+
+              var tableRow = '<tr class="bolosettings_elements">' 
+              tableRow += '<td>'+boloname+'</td>';
+              tableRow += '<td>'+runName+'</td>';
+              
+              console.log(boloname + " " + runName);
+
+              if(dataTypes[key] == "polar" && boloname.indexOf("ID") != -1){  
+                tableRow += '<td>'+params["polar-A"]+'</td>'
+                tableRow += '<td>'+params["polar-B"]+'</td>'
+                tableRow += '<td>'+params["polar-C"]+'</td>'
+                tableRow += '<td>'+params["polar-D"]+'</td>'
+                tableRow += "</tr>";                 
+                $("#bolosettings-body-" + dataTypes[key]).append(tableRow);                    
+              }
+
+              if(dataTypes[key] == "gain" && boloname.indexOf("ID") != -1){
+                tableRow += '<td>'+params["gain-ionisA"]+'</td>'
+                tableRow += '<td>'+params["gain-ionisB"]+'</td>'
+                tableRow += '<td>'+params["gain-ionisC"]+'</td>'
+                tableRow += '<td>'+params["gain-ionisD"]+'</td>'
+                tableRow += "</tr>";                 
+                $("#bolosettings-body-" + dataTypes[key]).append(tableRow);  
+              }
+
+              if(dataTypes[key] == "ampl" && boloname.indexOf("ID") != 0 ){
+                tableRow += '<td>'+params["ampl-chalA"]+'</td>'
+                tableRow += '<td>'+params["ampl-chalB"]+'</td>'
+                tableRow += "</tr>";                 
+                $("#bolosettings-body-" + dataTypes[key]).append(tableRow);  
+              }
+              
+              $("#bolosettings-table-" + dataTypes[key]).trigger("update"); 
+             
+              
+            }
+           
+          }
+        });
+
+      }
+
+    }
+  });
+}
+
+

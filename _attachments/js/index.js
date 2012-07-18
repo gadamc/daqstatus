@@ -517,6 +517,9 @@ function fillBoloSettings()
           limit:1,
           success:function(singleData){
 
+            if(singleData.rows[0]["key"][1] < "mf00a000")
+              return;
+
             var params = singleData.rows[0]["value"];
             var boloname = singleData.rows[0]["key"][0];
             var runName = singleData.rows[0]["key"][1] + "_" + singleData.rows[0]["key"][2];  

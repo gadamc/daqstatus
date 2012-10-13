@@ -476,7 +476,12 @@
   <div class="span2">Gory Details</div>
   <div class="span2">DB Doc ID</div>
   <div class="span4">${_id} <a href = "../../${_id}"></div>
+  {{if dbhost == "edelweiss.cloudant.com"}}
+  <div class="span4"> raw</a>&nbsp;<a href = "https://cloudant.com/futon/document.html?edelweiss%2Fdatadb/${_id}">Futon</a></div>
+  {{else}}
   <div class="span4"> raw</a>&nbsp;<a href = "/_utils/document.html?datadb/${_id}">Futon</a></div>
+  {{/if}}
+
 </div>
 
 </div>

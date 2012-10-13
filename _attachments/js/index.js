@@ -1,6 +1,8 @@
+var dbhost = window.location.host;
 var dbname = window.location.pathname.split("/")[1];
 var appName = window.location.pathname.split("/")[3];
 var db = $.couch.db(dbname);
+
 
 var currentRunName = "";
 var currentFileNumber = 0;
@@ -158,7 +160,8 @@ function sanitize(obj){  //should I put this functionality into a show function 
 function fillDataContainer(containerName, doc)
 {
   doc = sanitize( doc );
-  
+  doc['dbhost'] = dbhost;
+
   $(containerName).html( $.tmpl("output_template",  doc ));
   currentRunName = doc['run_name'];
   currentFileNumber = doc['file_number'];

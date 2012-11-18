@@ -13,7 +13,6 @@
 
     <!-- Le styles -->
       <link rel="stylesheet" href="css/bootstrap.min.css">    
-      <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
       <style type="text/css">
       /* Override some defaults */
       html, body {
@@ -196,9 +195,12 @@
                 </div>  
               </div>
 
+
               <div class="tab-pane" id="tab-bolosettings-container">
-                <h3>Most Recent Polarities</h3>
-                <table class="table tablesorter table-condensed bolosettings-table" id="bolosettings-table-polar">
+                <h5>These tables are sortable if you click on a column title</h5>
+                <br>
+                <h3>Voltage</h3>
+                <table class="table tablesorter table-striped table-condensed  bolosettings-table" id="bolosettings-table-polar">
                 <thead>
                   <tr>
                     <th style="width: 10%">Bolometer</th>
@@ -215,8 +217,8 @@
                 </table>
                 <br>
                 <br>
-                <h3>Most Recent Gain Settings</h3>
-                <table class="table tablesorter table-condensed bolosettings-table" id="bolosettings-table-gain">
+                <h3>Gain</h3>
+                <table class="table tablesorter table-striped table-condensed  bolosettings-table" id="bolosettings-table-gain">
                 <thead>
                   <tr>
                     <th style="width: 10%">Bolometer</th>
@@ -233,8 +235,8 @@
                 </table>
                 <br>
                 <br>
-                <h3>Most Recent Heat Ampl</h3>
-                <table class="table tablesorter table-condensed bolosettings-table" id="bolosettings-table-ampl">
+                <h3>Heat Ampl</h3>
+                <table class="table tablesorter table-striped table-condensed  bolosettings-table" id="bolosettings-table-ampl">
                 <thead>
                   <tr>
                     <th style="width: 10%">Bolometer</th>
@@ -247,6 +249,41 @@
                   <!-- to be filled in by javascript -->
                 </tbody>
                 </table>
+
+                <br>
+                <br>
+                <h3>Heat Comp</h3>
+                <table class="table tablesorter table-striped table-condensed  bolosettings-table" id="bolosettings-table-ampl">
+                <thead>
+                  <tr>
+                    <th style="width: 10%">Bolometer</th>
+                    <th style="width: 10%">Run</th>
+                    <th style="width: 10%">chalA</th>
+                    <th style="width: 10%">chalB</th>
+                  </tr>
+                </thead>
+                <tbody id="bolosettings-body-comp">
+                  <!-- to be filled in by javascript -->
+                </tbody>
+                </table>
+
+                <br>
+                <br>
+                <h3>Heat Corr</h3>
+                <table class="table tablesorter table-striped table-condensed  bolosettings-table" id="bolosettings-table-ampl">
+                <thead>
+                  <tr>
+                    <th style="width: 10%">Bolometer</th>
+                    <th style="width: 10%">Run</th>
+                    <th style="width: 10%">chalA</th>
+                    <th style="width: 10%">chalB</th>
+                  </tr>
+                </thead>
+                <tbody id="bolosettings-body-corr">
+                  <!-- to be filled in by javascript -->
+                </tbody>
+                </table>
+
               </div>
           
           </div>
@@ -266,12 +303,12 @@
 
     </div> <!-- /container -->
 
-    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.8.2.js"></script>
     <script type="text/javascript" src="js/jquery.tmpl.min.js"></script>
     <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
     <script type="text/javascript" src="js/jquery.couch.js"></script>
-    <script type="text/javascript" src="js/bootstrap-tab.js"></script>
-    <script type="text/javascript" src="js/bootstrap-button.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    
     <script type="text/javascript" src="js/index.js"></script>
     
   </body>

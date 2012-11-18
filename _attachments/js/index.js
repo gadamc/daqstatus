@@ -91,10 +91,8 @@ $(document).ready(function(){
     getSambaData(sambaList[i]);
   
 
-  //make table sortable and then fill it
-   $("#bolosettings-table-polar").tablesorter( );
-   $("#bolosettings-table-gain").tablesorter( );
-   $("#bolosettings-table-ampl").tablesorter( );
+  //make tables sortable and then fill it
+   $(".tablesorter").tablesorter( );
 
    fillBoloSettings();
    
@@ -498,22 +496,25 @@ function enter_select(event) {
 }
 
 //-------------------------------------------------
-function fillBoloSettings()
+function fillBoloSettings(runName, fileNum)
 {
+  runName = typeof runName !== 'undefined' ? runName : "zz99z999";
+  fileNum = typeof fileNum !== 'undefined' ? fileNum : 999;
 
   db.view(appName + "/boloParams",  {
     group_level:1,
     reduce:true,
     success:function(data){
 
-      var dataTypes = ["polar", "gain", "ampl"];
+      var dataTypes = ["polar", "gain", "ampl", "corr", "comp"];
+      $('.bolosettings_elements').remove();
 
       for ( var boloRow in data.rows ) {  
         
         if (data.rows[boloRow]['key'][0] == "veto") continue;
 
         db.view(appName + "/boloParams", {
-          startkey : [data.rows[boloRow]['key'][0], "zz99z999",999],
+          startkey : [data.rows[boloRow]['key'][0], runName, fileNum],
           endkey : [data.rows[boloRow]['key'][0], "",0],
           reduce:false,
           descending:true,
@@ -553,17 +554,30 @@ function fillBoloSettings()
                 $("#bolosettings-body-" + dataTypes[key]).append(tableRow);  
               }
 
-              if(dataTypes[key] == "ampl" && boloname.indexOf("ID") != 0 ){
+              if(dataTypes[key] == "ampl" && boloname.indexOf("ID") != -1 ){
                 tableRow += '<td>'+params["ampl-chalA"]+'</td>'
                 tableRow += '<td>'+params["ampl-chalB"]+'</td>'
                 tableRow += "</tr>";                 
                 $("#bolosettings-body-" + dataTypes[key]).append(tableRow);  
               }
-              
-              $("#bolosettings-table-" + dataTypes[key]).trigger("update"); 
+
+              if(dataTypes[key] == "corr" && boloname.indexOf("ID") != -1 ){
+                tableRow += '<td>'+params["corr-chalA"]+'</td>'
+                tableRow += '<td>'+params["corr-chalB"]+'</td>'
+                tableRow += "</tr>";                 
+                $("#bolosettings-body-" + dataTypes[key]).append(tableRow);  
+              }
+
+              if(dataTypes[key] == "comp" && boloname.indexOf("ID") != -1 ){
+                tableRow += '<td>'+params["comp-chalA"]+'</td>'
+                tableRow += '<td>'+params["comp-chalB"]+'</td>'
+                tableRow += "</tr>";                 
+                $("#bolosettings-body-" + dataTypes[key]).append(tableRow);  
+              }
              
-              
             }
+
+            $(".tablesorter").trigger("update"); 
            
           }
         });

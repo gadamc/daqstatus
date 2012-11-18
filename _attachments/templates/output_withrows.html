@@ -135,6 +135,7 @@
   <div class="span10">
 
   {{each Detecteurs}}
+  {{if $value.Bolo_hote == Hote}}
     <div class="row">
       <div class="span2 autoheight divtocollapse">${$value.bolometer}</div>
       <div class="autoheight iCanCollapse">        
@@ -170,6 +171,7 @@
           </div>
         </div>
     </div>
+  {{/if}}
   {{/each}}
   
   </div>  

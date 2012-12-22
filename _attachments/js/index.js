@@ -159,7 +159,8 @@ function fillDataContainer(containerName, doc)
 {
   doc = sanitize( doc );
   doc['dbhost'] = dbhost;
-
+  doc['file_number'] = zeroPad(doc['file_number'],3)
+  
   $(containerName).html( $.tmpl("output_template",  doc ));
   currentRunName = doc['run_name'];
   currentFileNumber = doc['file_number'];
@@ -494,6 +495,10 @@ function enter_select(event) {
    return false;     
         
 }
+function zeroPad(num, places) {
+    var zero = places - num.toString().length + 1;
+    return Array(+(zero > 0 && zero)).join("0") + num;
+}
 
 //-------------------------------------------------
 function fillBoloSettings(runName, fileNum)
@@ -526,7 +531,7 @@ function fillBoloSettings(runName, fileNum)
 
             var params = singleData.rows[0]["value"];
             var boloname = singleData.rows[0]["key"][0];
-            var runName = singleData.rows[0]["key"][1] + "_" + singleData.rows[0]["key"][2];  
+            var runName = singleData.rows[0]["key"][1] + "_" + zeroPad( singleData.rows[0]["key"][2], 3);  
 
             for (var key in dataTypes){
 

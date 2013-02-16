@@ -1,6 +1,6 @@
 function(doc) {
 
-  if(doc.type == "daqdocument" && doc.Detecteurs && isArray(doc.Detecteurs)){
+  if(doc.type == "daqdocument" && doc.Detecteurs && isArray(doc.Detecteurs) && doc.run_name && doc.file_number !== undefined){
 
     for (var i in doc.Detecteurs){
       var outputVal = {}

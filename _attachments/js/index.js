@@ -394,43 +394,71 @@ function getSelectData()
   if ($('#selectFileInput').val() != "")
     fileNum = parseInt($('#selectFileInput').val());
   
-  if (fileNum === "") {
-    
-    db.view(appName + "/run", {
-      endkey:[runName, 0],
-      startkey:[runName, 9999999],
-      descending:true,
-      reduce:false,
-      limit:1,
-      include_docs:true,
-      success:function(data){                     
-         if ( data.rows.length > 0 ) {                     
-            fillDataContainer("#selectrun-samba-datacontainer", data.rows[0]['doc']);
-            
-          }
-          else{
-            $("#selectrun-samba-container").html("<h5>no data available...</h5>");
-          }
-       }
-    });
-    
+  configOpt = {
+    reduce:false,
+    include_docs:true,
+    success:function(data){                     
+      if ( data.rows.length > 0 ) {                     
+        fillDataContainer("#selectrun-samba-datacontainer", data.rows[0]['doc']);
+          
+      }
+      else{
+        $("#selectrun-samba-container").html("<h5>no data available...</h5>");
+      }
+    }
+  };
+
+  if(fileNum === ""){
+    configOpt["endkey"] = [runName, 0];
+    configOpt["startkey"] = [runName, 9999999];
+    configOpt["limit"] = 1;
+    configOpt["descending"] = true;
   }
   else{
-    db.view(appName + "/run", {
-      key:[runName, fileNum],
-      reduce:false,
-      include_docs:true,
-      success:function(data){                     
-         if ( data.rows.length > 0 ) {                     
-            fillDataContainer("#selectrun-samba-datacontainer", data.rows[0]['doc']);
-          
-          }
-          else{
-            $("#selectrun-samba-container").html("<h5>no data available...</h5>");
-          }
-       }
-    });
+    configOpt["key"] = [runName, fileNum];
   }
+
+  db.view(appName + "/run", configOpt);
+
+  // if (fileNum === "") {
+    
+  //   db.view(appName + "/run", {
+  //     endkey:[runName, 0],
+  //     startkey:[runName, 9999999],
+  //     descending:true,
+  //     reduce:false,
+  //     limit:1,
+  //     include_docs:true,
+  //     success:function(data){                     
+  //        if ( data.rows.length > 0 ) {                     
+  //           fillDataContainer("#selectrun-samba-datacontainer", data.rows[0]['doc']);
+            
+  //         }
+  //         else{
+  //           $("#selectrun-samba-container").html("<h5>no data available...</h5>");
+  //         }
+  //      }
+  //   });
+    
+  // }
+  // else{
+  //   db.view(appName + "/run", {
+  //     key:[runName, fileNum],
+  //     reduce:false,
+  //     include_docs:true,
+  //     success:function(data){                     
+  //        if ( data.rows.length > 0 ) {                     
+  //           fillDataContainer("#selectrun-samba-datacontainer", data.rows[0]['doc']);
+          
+  //         }
+  //         else{
+  //           $("#selectrun-samba-container").html("<h5>no data available...</h5>");
+  //         }
+  //      }
+  //   });
+  // }
+
+
 }
 
 //----------------------------------------------------

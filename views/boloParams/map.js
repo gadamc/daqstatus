@@ -1,10 +1,10 @@
 function(doc) {
 
-  if(doc.type == "daqdocument"){
+  if(doc.type == "daqdocument" && doc.Detecteurs && Object.prototype.toString.call(doc.Detecteurs) === '[object Array]'){
 
     for (var i in doc.Detecteurs){
       var outputVal = {}
-      if (doc.Detecteurs[i]["Bolo.hote"] == doc["Hote"]){  //have to check this for nonsense
+      if (doc.Detecteurs[i]["bolometer"] && doc.Detecteurs[i]["Bolo.hote"] && doc.Detecteurs[i]["Bolo.hote"] == doc["Hote"]){  //have to check this for nonsense
         var info = doc.Detecteurs[i]['Bolo.reglages']
         for (var key in info){
           if( key.indexOf('polar') == 0  )

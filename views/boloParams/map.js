@@ -1,6 +1,6 @@
 function(doc) {
 
-  if(doc.type == "daqdocument" && doc.Detecteurs && Object.prototype.toString.call(doc.Detecteurs) === '[object Array]'){
+  if(doc.type == "daqdocument" && doc.Detecteurs && isArray(doc.Detecteurs)){
 
     for (var i in doc.Detecteurs){
       var outputVal = {}

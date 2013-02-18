@@ -9,7 +9,7 @@ var currentFileNumber = 0;
 var currentSamba = "";
 
 var savedData = {};
-var sambaList = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8'];
+var sambaList = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 's11', 's12'];
 
 // ____________________________________________________________________________________
 $(document).ready(function(){
